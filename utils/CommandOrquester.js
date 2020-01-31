@@ -7,17 +7,17 @@ class CommandOrchestrator {
     this.commands.push(command);
   }
 
-  execute(config) {
+  async execute(config) {
     const { command } = config;
     let data = '';
-    this.commands.forEach(cmd => {
-      console.log(cmd);
-      if(cmd.command == command) {
-        data = cmd.execute(config);
+    for(const cmd of this.commands) {
+      if(cmd.command.toUpperCase() == command.toUpperCase()) {
+        await cmd.execute(config);
+        console.log('obtuvo esta data', data);
       }
-    });
+    }
     console.log(data);
-    return data;
+    //return data;
   }
 }
 
