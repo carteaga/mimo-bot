@@ -4,11 +4,11 @@ class CaracolaCommand {
     this._respuestas = [
        'Maybe Someday'
       ,'Nada' // (dice esto cuando se le preguntó qué hacer)
-      ,'Ni' // (dice esto cuando se le preguntó un "¿cuál?" Pregunta)
       ,'Yo no lo creo'
       ,'No'
       ,'Sí'
-      ,'Prueba a preguntar otra vez'
+      ,'Prueba a preguntar otra vez',
+      'Probablemente'
     ];
   }
 
@@ -28,8 +28,6 @@ class CaracolaCommand {
     if(pregunta != '') {
       if(pregunta.toUpperCase() == 'QUE HACER?') {
         respuesta = `La respuesta a eso es: ${this._respuestas[1]}`;
-      } else if (pregunta.toUpperCase() == 'CUAL?') {
-        respuesta = `La respuesta a eso es: ${this._respuestas[2]}`;
       } else {
         const random = Math.floor(Math.random() * this._respuestas.length);
         respuesta = `🐚 ${pushname} la respuesta a eso es: ${this._respuestas[random]} 🐚`;

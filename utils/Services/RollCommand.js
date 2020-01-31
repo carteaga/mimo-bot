@@ -14,7 +14,7 @@ class RollCommand {
     } = context;
     const number = Number.parseInt(params[0]) || 6;
     const result = Math.floor(Math.random() * number) + 1;
-    await client.sendText(from, `🎲${pushname} haz lanzado ${result} de ${number} 🎲`); 
+    await client.sendText(from, `🎲${pushname} has lanzado ${result} de ${number} 🎲`); 
   }
 }
 

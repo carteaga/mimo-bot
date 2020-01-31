@@ -1,14 +1,12 @@
 const axios = require("axios");
 
-async function getUrl(url) {
+async function getUrl(url, config = {}) {
   try {
-    const response = await axios.get(url);
+    const response = await axios.get(url, config);
     const data = response.data;
     return data;
-    console.log(data);
   } catch (error) {
-    console.log(error);
-
+    return undefined;
   }
 }
 
