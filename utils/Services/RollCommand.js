@@ -9,7 +9,8 @@ class RollCommand {
 
   async execute({ command, params, context, client }) {
     const {
-      sender: { pushname }
+      sender: { pushname },
+      from
     } = context;
     const number = Number.parseInt(params[0]) || 6;
     const result = Math.floor(Math.random() * number) + 1;

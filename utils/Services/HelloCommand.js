@@ -9,7 +9,8 @@ class HelloCommand {
 
   async execute({ command, params, context, client }) {
     const {
-      sender: { pushname }
+      sender: { pushname },
+      from
     } = context;
     const name = params.lenght ? params.join(" ") : pushname;
     await client.sendText(from, `🤖🖐 Hola ${name}`); 

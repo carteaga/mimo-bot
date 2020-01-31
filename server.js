@@ -9,13 +9,9 @@ async function start(client) {
   client.onMessage(async message => {
     console.log(message);
     try {
-      const {
-        from,
-        body,
-        chat: { id }
-      } = message;
-
+      const { body } = message;
       const { command, params } = commandParser.parser(body);
+      
       console.log("mensaje", body);
       console.log("comando", command);
       console.log("parametros", params);

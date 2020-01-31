@@ -11,10 +11,11 @@ class ChuckPhrasesCommand {
 
   async execute({ command, params, context, client }) {
     const {
-      sender: { pushname }
+      sender: { pushname },
+      from
     } = context;
     const data = await getUrl('https://api.chucknorris.io/jokes/random');
-    await client.sendText(context.from, `chuck says: "${data.value}"`)
+    await client.sendText(from, `${pushname} chuck says: "${data.value}"`)
   }
 }
 

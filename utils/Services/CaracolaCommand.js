@@ -18,7 +18,8 @@ class CaracolaCommand {
 
   async execute({ command, params, context, client }) {
     const {
-      sender: { pushname }
+      sender: { pushname },
+      from
     } = context;
 
     const pregunta = params.join(" ");
@@ -35,7 +36,7 @@ class CaracolaCommand {
       }
 
     }
-    await client.sendText(context.from, respuesta);
+    await client.sendText(from, respuesta);
   }
 }
 
