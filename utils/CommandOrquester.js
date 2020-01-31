@@ -9,11 +9,12 @@ class CommandOrchestrator {
 
   async execute(config) {
     const { command } = config;
-    for (const cmd of this.commands) {
+    const promises = this.commands.map(cmd => {
       if (cmd.command.toUpperCase() == command.toUpperCase()) {
-        await cmd.execute(config);
+        cmd.execute(config);
       }
-    }
+    });
+    Promise.all(promises);
   }
 }
 
