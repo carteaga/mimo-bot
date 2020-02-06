@@ -1,11 +1,14 @@
 const sulla = require("sulla-hotfix");
-const CommandParser = require("./utils/CommandParser");
-const commandOrquester = require("./utils/InitCommand");
+const CommandParser = require("./src/CommandParser");
+const commandOrquester = require("./src/InitCommand");
 const commandParser = new CommandParser();
 
-sulla.create().then(async client => await start(client));
-
 async function start(client) {
+  client.onStateChanged(state => {
+    console.log("statechanged", state);
+    if (state === "CONFLICT") client.forceRefocus();
+  });
+
   client.onMessage(async message => {
     try {
       const { body, from, type } = message;
@@ -27,3 +30,5 @@ async function start(client) {
     }
   });
 }
+
+sulla.create("session").then(async client => await start(client));

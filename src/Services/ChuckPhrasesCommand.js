@@ -1,4 +1,4 @@
-const { getUrl } = require('../getUrl');
+const { getUrl } = require('../../utils/getUrl');
 
 class ChuckPhrasesCommand {
   constructor() {
