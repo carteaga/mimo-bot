@@ -4,7 +4,6 @@ const commandOrquester = require("./src/InitCommand");
 const commandParser = new CommandParser();
 
 async function start(client) {
-  
   client.onStateChanged(state => {
     console.log("statechanged", state);
     if (state === "CONFLICT") client.forceRefocus();
