@@ -47,9 +47,10 @@ class PokemonCommand {
       const img = await this.getImagePokemon(front_default);
       const textFormated = this.formatResponsePokemon(response);
 
-      img
+      const result = img
         ? await client.sendImage(from, img, "img.png", textFormated)
         : await client.sendText(from, textFormated);
+      console.log(result);
     } else {
       await client.sendText(
         from,

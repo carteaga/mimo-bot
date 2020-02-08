@@ -31,4 +31,4 @@ async function start(client) {
   });
 }
 
-sulla.create("session").then(async client => await start(client));
+sulla.create().then(async client => await start(client));
