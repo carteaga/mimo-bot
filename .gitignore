@@ -112,3 +112,5 @@ temp/
 
 session/
 # End of https://www.gitignore.io/api/node,dotenv
+
+qr_code_session.png

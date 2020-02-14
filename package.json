@@ -20,6 +20,6 @@
   "license": "ISC",
   "dependencies": {
     "axios": "^0.19.2",
-    "sulla-hotfix": "^1.7.5"
+    "sulla-hotfix": "^1.7.12"
   }
 }
