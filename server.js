@@ -35,4 +35,6 @@ async function start(client) {
 sulla.create('session',{
   throwErrorOnTosBlock:true
 }).then(async client => await start(client))
-  .catch(e => console.log);
+  .catch(e => {
+    console.log('error', e);
+  });
