@@ -1,7 +1,10 @@
+const moment = require('moment');
+moment.locale('es');
+
 class IsAliveCommand {
   constructor() {
     this._command = "!alive";
-    this._start = new Date();
+    this._start = moment();
   }
 
   get command() {
@@ -11,9 +14,8 @@ class IsAliveCommand {
   async execute({ command, params, context, client }) {
     const { from } = context;
     const end = new Date();
-    const diff = this._start - end;
 
-    await client.sendText(from, `Estoy vivo desde ${diff}`);
+    await client.sendText(from, `Estoy vivo ${this._start.fromNow()}`);
   }
 }
 
