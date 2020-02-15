@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "SET DEBUG=express:*,app:*&& node server",
-    "start": "SET NODE_ENV=production&& node server",
+    "dev": "cross-env DEBUG=express:*,app:* node server",
+    "start": "cross-env NODE_ENV=production node server",
     "clean": "rm -rf session && rm -rf dist",
     "clean:full": "rm -rf node_modules && npm run clean"
   },
@@ -20,6 +20,7 @@
   "license": "ISC",
   "dependencies": {
     "axios": "^0.19.2",
+    "cross-env": "^7.0.0",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "moment": "^2.24.0",
