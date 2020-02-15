@@ -9,7 +9,6 @@
     "clean": "rm -rf session && rm -rf dist",
     "clean:full": "rm -rf node_modules && npm run clean"
   },
-  
   "engines": {
     "node": ">=12.14.1",
     "npm": ">=6.13.4"
@@ -21,6 +20,7 @@
   "license": "ISC",
   "dependencies": {
     "axios": "^0.19.2",
+    "express": "^4.17.1",
     "sulla-hotfix": "^1.7.13"
   }
 }
