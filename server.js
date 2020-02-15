@@ -45,7 +45,7 @@ sulla
   })
   .then(async client => await start(client))
   .catch(e => {
-    debug("error", e);
+    console.log("error", e);
   });
 
 app.get("/", async (req, res) => {
