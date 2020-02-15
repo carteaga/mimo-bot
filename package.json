@@ -9,6 +9,7 @@
     "clean": "rm -rf session && rm -rf dist",
     "clean:full": "rm -rf node_modules && npm run clean"
   },
+  
   "engines": {
     "node": ">=12.14.1",
     "npm": ">=6.13.4"
