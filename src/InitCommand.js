@@ -9,6 +9,7 @@ const ChuckPhrasesCommand = require("./Services/ChuckPhrasesCommand");
 const HoroscopoCommand = require("./Services/HoroscopoCommand");
 const WikipediaCommand = require("./Services/WikipediaCommand");
 const IsAliveCommand = require("./Services/IsAliveCommand");
+const TransantiagoCommand = require("./Services/TransantiagoCommand");
 
 const commandOrquester = new CommandOrquester();
 commandOrquester.addCommand(new HelloCommand());
@@ -19,4 +20,5 @@ commandOrquester.addCommand(new PokemonCommand());
 commandOrquester.addCommand(new HoroscopoCommand());
 commandOrquester.addCommand(new WikipediaCommand());
 commandOrquester.addCommand(new IsAliveCommand());
+commandOrquester.addCommand(new TransantiagoCommand());
 module.exports = commandOrquester;
