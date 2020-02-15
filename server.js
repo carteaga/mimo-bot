@@ -1,17 +1,18 @@
 const sulla = require("sulla-hotfix");
 const CommandParser = require("./src/CommandParser");
 const commandOrquester = require("./src/InitCommand");
-const commandParser = new CommandParser();
-const express = require('express')
-const port = process.env.PORT || 8080;
+const express = require("express");
+const { config } = require("./src/config/index");
+const debug = require("debug")("app:server");
 
-const app = express()
-app.use(express.json())
+const commandParser = new CommandParser();
+
+const app = express();
+app.use(express.json());
 
 async function start(client) {
-  
   client.onStateChanged(state => {
-    console.log("statechanged", state);
+    debug("statechanged", state);
     if (state === "CONFLICT") client.forceRefocus();
   });
 
@@ -20,7 +21,7 @@ async function start(client) {
       const { body, from, type } = message;
       if (type == "chat") {
         const { command, params } = commandParser.parser(body);
-        console.log(
+        debug(
           `- ${from} envia: ${body} = commando "${command}", parametros [${params}]`
         );
         await commandOrquester.execute({
@@ -37,17 +38,20 @@ async function start(client) {
   });
 }
 
-sulla.create('session',{
-  throwErrorOnTosBlock:true
-}).then(async client => await start(client))
+sulla
+  .create("session", {
+    throwErrorOnTosBlock: true,
+    headless: !config.dev
+  })
+  .then(async client => await start(client))
   .catch(e => {
-    console.log('error', e);
+    debug("error", e);
   });
 
-  app.get('/', async (req, res) => {
-    return res.send('Is alive!')
-  })
+app.get("/", async (req, res) => {
+  return res.sendFile("./index.html", { root: __dirname });
+});
 
-app.listen(port, function () {
-  console.log(`Example app listening on port ${port}!`);
+app.listen(config.port, function() {
+  debug(`Example app listening on port ${config.port}!`);
 });

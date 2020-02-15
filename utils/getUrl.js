@@ -12,4 +12,4 @@ async function getUrl(url, config = {}) {
 
 module.exports = {
   getUrl
-}
+};

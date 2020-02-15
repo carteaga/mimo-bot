@@ -8,7 +8,8 @@ class CaracolaCommand {
       ,'No'
       ,'Sí'
       ,'Prueba a preguntar otra vez',
-      'Probablemente'
+      'Probablemente',
+      'Ninguno'
     ];
   }
 
@@ -30,7 +31,7 @@ class CaracolaCommand {
         respuesta = `La respuesta a eso es: ${this._respuestas[1]}`;
       } else {
         const random = Math.floor(Math.random() * this._respuestas.length);
-        respuesta = `🐚 ${pushname} la respuesta a eso es: ${this._respuestas[random]} 🐚`;
+        respuesta = `🐚 ${pushname} la respuesta a eso es: ${this._respuestas[random]}`;
       }
 
     }

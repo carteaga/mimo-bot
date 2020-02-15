@@ -34,10 +34,10 @@ class HoroscopoCommand {
 
     if (signs.indexOf(sign) > -1) {
       const response = await getUrl("https://api.adderou.cl/tyaas/");
-      if(response) {
+      if (response) {
         const { horoscopo } = response;
         const data = horoscopo[sign];
-  
+
         await client.sendText(
           from,
           `⚖️: ${data.nombre}\n🗓️: ${data.fechaSigno}\n💘: ${data.amor}\n⚕️: ${data.salud}\n💰: ${data.dinero}\n🎨: ${data.color}\n🔢: ${data.numero}\n`
@@ -45,7 +45,6 @@ class HoroscopoCommand {
       } else {
         await client.sendText(from, "No hay horoscopo :c");
       }
-
     } else {
       await client.sendText(from, "🤷‍♂️");
     }

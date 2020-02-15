@@ -13,7 +13,7 @@ class HelloCommand {
       from
     } = context;
     const name = params.length ? params.join(" ") : pushname;
-    await client.sendText(from, `🤖🖐 Hola ${name}`); 
+    await client.sendText(from, `🤖🖐 Hola ${name}`);
   }
 }
 
