@@ -1,15 +1,15 @@
 const CommandOrquester = require("./CommandOrquester");
 
 // services
-const HelloCommand = require("./Services/HelloCommand");
-const RollCommand = require("./Services/RollCommand");
-const CaracolaCommand = require("./Services/CaracolaCommand");
-const PokemonCommand = require("./Services/PokemonCommand");
-const ChuckPhrasesCommand = require("./Services/ChuckPhrasesCommand");
-const HoroscopoCommand = require("./Services/HoroscopoCommand");
-const WikipediaCommand = require("./Services/WikipediaCommand");
-const IsAliveCommand = require("./Services/IsAliveCommand");
-const TransantiagoCommand = require("./Services/TransantiagoCommand");
+const HelloCommand = require("./services/HelloCommand");
+const RollCommand = require("./services/RollCommand");
+const CaracolaCommand = require("./services/CaracolaCommand");
+const PokemonCommand = require("./services/PokemonCommand");
+const ChuckPhrasesCommand = require("./services/ChuckPhrasesCommand");
+const HoroscopoCommand = require("./services/HoroscopoCommand");
+const WikipediaCommand = require("./services/WikipediaCommand");
+const IsAliveCommand = require("./services/IsAliveCommand");
+const TransantiagoCommand = require("./services/TransantiagoCommand");
 
 const commandOrquester = new CommandOrquester();
 commandOrquester.addCommand(new HelloCommand());
