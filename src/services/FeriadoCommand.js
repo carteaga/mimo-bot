@@ -11,7 +11,7 @@ class FeriadoCommand {
     return this._command;
   }
 
-  isHolidayVigent(date) {
+  isHolidayValid(date) {
     return function filter(holiday) {
       const dateHoliday = moment(holiday.fecha); 
       return date <= dateHoliday;
@@ -28,7 +28,7 @@ class FeriadoCommand {
 
     if (response) {
       const holidayRemaining = response
-        .filter(this.isHolidayVigent(currentDate))
+        .filter(this.isHolidayValid(currentDate))
         .slice(0, maxHolidays);
 
       msg = `Próximos ${maxHolidays || ''} feriados\n`;
