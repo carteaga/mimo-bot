@@ -26,11 +26,12 @@ class HoroscopoCommand {
       "sagitario",
       "capricornio",
       "acuario",
-      "pisis"
+      "piscis"
     ];
 
     let sign = params.length ? params[0] : "";
     sign = this.cleanText(sign).toLowerCase();
+    let msg = "🤷‍♂️";
 
     if (signs.indexOf(sign) > -1) {
       const response = await getUrl("https://api.adderou.cl/tyaas/");
@@ -38,16 +39,21 @@ class HoroscopoCommand {
         const { horoscopo } = response;
         const data = horoscopo[sign];
 
-        await client.sendText(
-          from,
-          `⚖️: ${data.nombre}\n🗓️: ${data.fechaSigno}\n💘: ${data.amor}\n⚕️: ${data.salud}\n💰: ${data.dinero}\n🎨: ${data.color}\n🔢: ${data.numero}\n`
-        );
+        msg = [
+          `⚖️: ${data.nombre}`,
+          `🗓️: ${data.fechaSigno}`,
+          `💘: ${data.amor}`,
+          `⚕️: ${data.salud}`,
+          `💰: ${data.dinero}`,
+          `🎨: ${data.color}`,
+          `🔢: ${data.numero}`
+        ].join("\n\r");
       } else {
-        await client.sendText(from, "No hay horoscopo :c");
+        msg = "No hay horóscopo";
       }
-    } else {
-      await client.sendText(from, "🤷‍♂️");
     }
+
+    await client.sendText(from, msg);
   }
 }
 
