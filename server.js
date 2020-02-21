@@ -41,7 +41,9 @@ async function start(client) {
 sulla
   .create("session", {
     throwErrorOnTosBlock: true,
-    headless: !config.dev
+    headless: !config.dev,
+    autoRefresh: true, 
+    qrRefreshS: 15
   })
   .then(async client => await start(client))
   .catch(e => {
