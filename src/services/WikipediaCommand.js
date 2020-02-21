@@ -13,13 +13,13 @@ class WikipediaCommand {
     const { from } = context;
     const search = params.join(" ");
     const response = await getUrl(
-      `https://wikipedia.org/w/api.php?action=opensearch&search=${search}&limit=10&format=json`
+      `https://es.wikipedia.org/w/api.php?action=opensearch&search=${search}&limit=10&format=json`
     );
 
     if (response) {
       let reply = "Resultados:\n";
       response[3].forEach(link => {
-        reply += `${link}\n`;
+        reply += `\`\`\`${link}\n\`\`\``;
       });
       await client.sendText(from, reply);
     } else {
