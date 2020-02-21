@@ -19,7 +19,7 @@ class WikipediaCommand {
     if (response) {
       let reply = "Resultados:\n";
       response[3].forEach(link => {
-        reply += `\`\`\`${link}\n\`\`\``;
+        reply += `${link}\n\r`;
       });
       await client.sendText(from, reply);
     } else {
