@@ -75,4 +75,4 @@ setInterval(async () => {
       `ping ${moment().format("LLLL")}`
     );
   }
-}, 1000 * 60);
+}, config.timePing);
