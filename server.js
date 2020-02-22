@@ -12,7 +12,7 @@ app.use(express.json());
 
 async function start(client) {
   client.onStateChanged(state => {
-    debug("statechanged", state);
+    console.log("statechanged", state);
     if (state === "CONFLICT") client.forceRefocus();
   });
 
@@ -33,7 +33,6 @@ async function start(client) {
       }
     } catch (err) {
       console.log(err);
-      client.kill();
     }
   });
 }
@@ -43,7 +42,11 @@ sulla
     throwErrorOnTosBlock: true,
     headless: !config.dev,
     autoRefresh: true,
-    qrRefreshS: 15
+    qrRefreshS: 15,
+    killTimer: 40,
+    cacheEnabled: false,
+    devtools: config.dev,
+    blockCrashLogs: true
   })
   .then(async client => await start(client))
   .catch(e => {
