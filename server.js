@@ -7,6 +7,9 @@ const debug = require("debug")("app:server");
 
 const commandParser = new CommandParser();
 
+const app = express();
+app.use(express.json());
+
 async function start(client) {
   client.onStateChanged(state => {
     debug("statechanged", state);
@@ -46,3 +49,11 @@ sulla
   .catch(e => {
     console.log("error", e);
   });
+
+app.get("/", async (req, res) => {
+  return res.sendFile("./index.html", { root: __dirname });
+});
+
+app.listen(config.port, function() {
+  debug(`Example app listening on port ${config.port}!`);
+});
