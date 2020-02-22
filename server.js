@@ -4,13 +4,18 @@ const commandOrquester = require("./src/InitCommand");
 const express = require("express");
 const { config } = require("./src/config/index");
 const debug = require("debug")("app:server");
-
+const moment = require("moment");
+moment.locale("es");
 const commandParser = new CommandParser();
 
 const app = express();
 app.use(express.json());
 
+let clientGlobal;
+
 async function start(client) {
+  clientGlobal = client;
+
   client.onStateChanged(state => {
     console.log("statechanged", state);
     if (state === "CONFLICT") client.forceRefocus();
@@ -60,3 +65,14 @@ app.get("/", async (req, res) => {
 app.listen(config.port, function() {
   debug(`Example app listening on port ${config.port}!`);
 });
+
+/* ping message */
+setInterval(async () => {
+  if (clientGlobal) {
+    debug(`enviado ping a ${config.phonePing}`);
+    await clientGlobal.sendText(
+      config.phonePing,
+      `ping ${moment().format("LLLL")}`
+    );
+  }
+}, 1000 * 60);
