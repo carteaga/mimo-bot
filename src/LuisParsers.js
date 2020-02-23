@@ -17,12 +17,12 @@ class LuisParser {
     const {
       query, 
       topScoringIntent: {
-        intent
+        intent, score
       }, entities
     } = response;
 
     let msg = query;
-    if(intent) {
+    if(intent && score > 0.9) {
       msg = intent;
       entities.forEach(entity => {
         msg += ' ' + entity.entity;
