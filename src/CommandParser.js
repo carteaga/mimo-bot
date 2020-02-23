@@ -1,3 +1,5 @@
+const { getUrl } = require("../utils/getUrl");
+
 class CommandParser {
   parser(message) {
     if(typeof message != 'string') return { command: "" , params: [] }; 

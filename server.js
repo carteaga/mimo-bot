@@ -4,10 +4,12 @@ const commandOrquester = require("./src/InitCommand");
 const express = require("express");
 const { config } = require("./src/config/index");
 const debug = require("debug")("app:server");
+const LuisParser = require("./src/LuisParsers");
+
 const moment = require("moment");
 moment.locale("es");
 const commandParser = new CommandParser();
-
+const luisParser = new LuisParser();
 const app = express();
 app.use(express.json());
 
@@ -25,7 +27,8 @@ async function start(client) {
     try {
       const { body, from, type } = message;
       if (type == "chat") {
-        const { command, params } = commandParser.parser(body);
+        const messageProcessed = await luisParser.parser(body);
+        const { command, params } = commandParser.parser(messageProcessed);
         debug(
           `- ${from} envia: ${body} = commando "${command}", parametros [${params}]`
         );
