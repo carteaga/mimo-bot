@@ -27,17 +27,26 @@ async function start(client) {
     try {
       const { body, from, type } = message;
       if (type == "chat") {
-        const messageProcessed = await luisParser.parser(body);
-        const { command, params } = commandParser.parser(messageProcessed);
-        debug(
-          `- ${from} envia: ${body} = commando "${command}", parametros [${params}]`
-        );
-        await commandOrquester.execute({
-          command,
-          params,
-          context: message,
-          client
-        });
+        const regex = /(^!.*)|(mbot|bot|mimo-bot)/i;
+        const commandRegex = /^!.*/;
+        if (regex.test(body)) {
+          let messageProcessed = body;
+
+          if (!commandRegex.test(body)) {
+            messageProcessed = await luisParser.parser(body);
+          }
+
+          const { command, params } = commandParser.parser(messageProcessed);
+          debug(
+            `- ${from} envia: ${body} = commando "${command}", parametros [${params}]`
+          );
+          await commandOrquester.execute({
+            command,
+            params,
+            context: message,
+            client
+          });
+        }
       }
     } catch (err) {
       console.log(err);

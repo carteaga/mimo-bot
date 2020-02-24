@@ -22,7 +22,7 @@ class LuisParser {
     } = response;
 
     let msg = query;
-    if(intent && score > 0.9) {
+    if(intent && score > 0.7) {
       msg = intent;
       entities.forEach(entity => {
         msg += ' ' + entity.entity;
