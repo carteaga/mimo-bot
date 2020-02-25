@@ -27,7 +27,7 @@ async function start(client) {
     try {
       const { body, from, type } = message;
       if (type == "chat") {
-        const regex = /(^!.*)|(mbot|bot|mimo-bot)/i;
+        const regex = /(^!.*)|(mbot|bot|mimo-bot|mimo\s+bot)/i;
         const commandRegex = /^!.*/;
         if (regex.test(body)) {
           let messageProcessed = body;
