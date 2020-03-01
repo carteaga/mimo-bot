@@ -48,6 +48,7 @@ async function start(client) {
           });
         }
       }
+      await client.sendSeen(message.chatId);
     } catch (err) {
       console.log(err);
     }
