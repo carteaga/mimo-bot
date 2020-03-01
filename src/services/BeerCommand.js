@@ -64,7 +64,7 @@ class BeerCommand {
     repeat = repeat > max ? max : repeat;
     await client.sendText(
       from,
-      `${"🍺".repeat(repeat)} *${beerType}* para \`\`\`${pushname}\`\`\``
+      `${"🍺".repeat(repeat)} *${beerType}* \`\`\`para\`\`\` ${pushname}`
     );
   }
 }
