@@ -2,7 +2,6 @@ class BeerCommand {
   constructor() {
     this._command = "!beer";
     this.beerTypes = [
-      ,
       "Ale",
       "Altbier",
       "Amber ale",
