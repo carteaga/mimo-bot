@@ -20,7 +20,7 @@ class Covid19Command {
 
   generateMsgAllCases(response) {
     return [
-      `Resumen _mundial_`,
+      `Resumen mundial`,
       `Casos: ${this.formatNumber(response.cases)}`,
       `Muertes: ${this.formatNumber(response.deaths)}`,
       `Recuperados: ${this.formatNumber(response.recovered)}`,
