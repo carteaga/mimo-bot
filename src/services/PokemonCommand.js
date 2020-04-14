@@ -22,31 +22,34 @@ class PokemonCommand {
   }
 
   formatResponsePokemon(data) {
-    const { weight, types, height, name, abilities } = data;
-    const abilitiesPokemon = abilities.map(info => info.ability.name).join("|");
-    const typesPokemon = types.map(info => info.type.name).join("|");
-    const response = `🤓 ${name} el pokémon tipo [${typesPokemon}] pesa ${weight /
-      10}kg, mide ${height / 10}m y posee ${abilities.length} habilidade(s): [${abilitiesPokemon}]`;
-    return response;
+    const { weight, types, height, name, abilities, id } = data;
+    const abilitiesPokemon = abilities
+      .map((info) => info.ability.name)
+      .join(", ");
+    const typesPokemon = types.map((info) => info.type.name).join(", ");
+    
+    return [
+      `#${id} *${name}* | Tipo(s): ${typesPokemon}`,
+      `Pesa: ${weight / 10}kg | Mide: ${height / 10}m`,
+      `Habilidades: ${abilitiesPokemon}`,
+    ].join("\n");
   }
 
   async execute({ command, params, context, client }) {
     const { from } = context;
-    let idPokemon = params[0] || '';
-    if (idPokemon) {
-      if (!isNaN(idPokemon)) {
-        idPokemon = parseInt(idPokemon, 10);
-      }
-    }
-    const request = `https://pokeapi.co/api/v2/pokemon/${idPokemon.toLowerCase()}`;
+    let idPokemon = params[0] || "";
+    idPokemon = isNaN(params[0])
+      ? idPokemon.toLowerCase()
+      : parseInt(idPokemon, 10);
+    const request = `https://pokeapi.co/api/v2/pokemon/${idPokemon}`;
     const response = await getUrl(request);
 
-    if(!idPokemon && response) {
+    if (!idPokemon && response) {
       const { count } = response;
       await client.sendText(from, `Hay ${count} pokémon`);
     } else if (response) {
       const {
-        sprites: { front_default }
+        sprites: { front_default },
       } = response;
 
       const img = await this.getImagePokemon(front_default);
