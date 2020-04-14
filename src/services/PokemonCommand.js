@@ -32,11 +32,16 @@ class PokemonCommand {
 
   async execute({ command, params, context, client }) {
     const { from } = context;
-    const idPokemon = params[0] || '';
+    let idPokemon = params[0] || '';
+    if (idPokemon) {
+      if (!isNaN(idPokemon)) {
+        idPokemon = parseInt(idPokemon, 10);
+      }
+    }
     const request = `https://pokeapi.co/api/v2/pokemon/${idPokemon.toLowerCase()}`;
     const response = await getUrl(request);
 
-    if(idPokemon == '' && response) {
+    if(!idPokemon && response) {
       const { count } = response;
       await client.sendText(from, `Hay ${count} pokémon`);
     } else if (response) {
