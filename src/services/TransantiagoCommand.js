@@ -1,7 +1,9 @@
+const Service = require("../Service");
 const { getUrl } = require("../../utils/getUrl");
 
-class TransantiagoCommand {
+class TransantiagoCommand extends Service {
   constructor() {
+    super();
     this._command = "!tran";
   }
 

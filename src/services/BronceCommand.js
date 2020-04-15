@@ -1,8 +1,10 @@
 const phrases = require('../../utils/phrases');
+const Service = require("../Service");
 
-class BronceCommand {
+class BronceCommand extends Service {
   
   constructor() {
+    super();
     this._command = "!bronce";
   }
 

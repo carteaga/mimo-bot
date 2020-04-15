@@ -1,5 +1,8 @@
-class CaracolaCommand {
+const Service = require("../Service");
+
+class CaracolaCommand extends Service {
   constructor() {
+    super();
     this._command = "!caracola";
     this._respuestas = [
        'Maybe Someday'

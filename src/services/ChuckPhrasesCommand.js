@@ -1,7 +1,9 @@
 const { getUrl } = require("../../utils/getUrl");
+const Service = require("../Service");
 
-class ChuckPhrasesCommand {
+class ChuckPhrasesCommand extends Service {
   constructor() {
+    super();
     this._command = "!chuck";
   }
 

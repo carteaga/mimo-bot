@@ -1,7 +1,9 @@
+const Service = require("../Service");
 const { getUrl } = require("../../utils/getUrl");
 
-class WikipediaCommand {
+class WikipediaCommand extends Service {
   constructor() {
+    super();
     this._command = "!wiki";
   }
 

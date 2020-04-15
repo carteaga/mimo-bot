@@ -131,4 +131,6 @@ qr_code_session.png
 .history
 .deployment
 
+session.data.json
+
 # End of https://www.gitignore.io/api/visualstudiocode

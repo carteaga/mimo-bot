@@ -1,5 +1,8 @@
-class HelloCommand {
+const Service = require("../Service");
+
+class HelloCommand extends Service {
   constructor() {
+    super();
     this._command = "!hello";
   }
 

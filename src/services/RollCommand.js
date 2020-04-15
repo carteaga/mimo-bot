@@ -1,5 +1,8 @@
-class RollCommand {
+const Service = require("../Service");
+
+class RollCommand extends Service {
   constructor() {
+    super();
     this._command = "!roll";
   }
 

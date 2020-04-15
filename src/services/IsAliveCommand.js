@@ -1,8 +1,10 @@
+const Service = require("../Service");
 const moment = require('moment');
 moment.locale('es');
 
-class IsAliveCommand {
+class IsAliveCommand extends Service {
   constructor() {
+    super();
     this._command = "!alive";
     this._start = moment();
   }

@@ -7,7 +7,8 @@ const config = {
   timePing: process.env.TIME_PING || 3600000,
   luisKey: process.env.LUIS_KEY,
   luisEndPoint: process.env.LUIS_ENDPOINT,
-  luisAppId: process.env.LUIS_APP_ID
+  luisAppId: process.env.LUIS_APP_ID,
+  youtubeKey: process.env.YOUTUBE_KEY
 }
 
 module.exports = {

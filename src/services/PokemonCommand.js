@@ -1,8 +1,10 @@
+const Service = require("../Service");
 const { getUrl } = require("../../utils/getUrl");
 const { Buffer } = require("buffer");
 
-class PokemonCommand {
+class PokemonCommand extends Service {
   constructor() {
+    super();
     this._command = "!poke";
   }
 

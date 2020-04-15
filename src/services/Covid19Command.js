@@ -1,8 +1,10 @@
 const { getUrl } = require("../../utils/getUrl");
 const numeral = require("numeral");
+const Service = require("../Service");
 
-class Covid19Command {
+class Covid19Command extends Service {
   constructor() {
+    super();
     this._command = "!covid";
   }
 
@@ -47,7 +49,6 @@ class Covid19Command {
 
   async execute({ command, params, context, client }) {
     const { from } = context;
-    const end = new Date();
     const resource = "https://coronavirus-19-api.herokuapp.com";
     const country = params.join(" ") || "chile";
     let msg = "";

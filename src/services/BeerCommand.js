@@ -1,5 +1,8 @@
-class BeerCommand {
+const Service = require("../Service");
+
+class BeerCommand extends Service {
   constructor() {
+    super();
     this._command = "!beer";
     this.beerTypes = [
       "Ale",
