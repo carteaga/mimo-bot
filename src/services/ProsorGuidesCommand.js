@@ -37,14 +37,14 @@ class ProsorGuides extends Service {
 
   async execute({ command, params, context, client }) {
     const { from } = context;
-
+    const searchText = params.join(" ");
     const query = querystring.stringify({
       part: "snippet",
       channelId: "UCUhzcbraLcYQTd3ldHBVnWA",
       order: "date",
-      q: params.join(" "),
+      q: searchText,
       key: youtubeKey,
-      maxResults: 3,
+      maxResults: 10,
     });
 
     const searchResource = `${this._api}/search?${query}`;
@@ -52,14 +52,24 @@ class ProsorGuides extends Service {
 
     if (response) {
       const { items } = response;
-      if (items.length) {
+      const regex = new RegExp(
+        ".*" + searchText.replace(" ", "\\s{0,}") + ".*",
+        "gmi"
+      );
+      console.log(regex)
+      console.log(items.length)
+      const itemsFiltered = items
+        .filter((item) => regex.test(item.snippet.title))
+        .slice(0, 3);
+
+      if (itemsFiltered.length) {
         let msg = "";
 
-        for (let index = 0; index < items.length; index++) {
+        for (let index = 0; index < itemsFiltered.length; index++) {
           const {
             snippet: { title, publishedAt },
             id: { videoId },
-          } = items[index];
+          } = itemsFiltered[index];
 
           const shortDate = moment(publishedAt).format("L");
 

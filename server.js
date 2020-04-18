@@ -1,4 +1,4 @@
-const sulla = require("sulla-hotfix");
+const sulla = require('@open-wa/wa-automate');
 const CommandParser = require("./src/CommandParser");
 const commandOrquester = require("./src/InitCommand");
 const express = require("express");

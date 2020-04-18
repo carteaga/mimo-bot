@@ -1,4 +1,5 @@
 const axios = require("axios");
+const debug = require("debug")("app:server");
 
 async function getUrl(url, config = {}) {
   try {
@@ -6,6 +7,7 @@ async function getUrl(url, config = {}) {
     const data = response.data;
     return data;
   } catch (error) {
+    debug(error);
     return undefined;
   }
 }
