@@ -14,8 +14,6 @@ app.listen(config.port, function () {
 });
 
 async function start(client) {
-  clientGlobal = client;
-
   client.onStateChanged((state) => {
     console.log("statechanged", state);
     if (state === "CONFLICT") client.forceRefocus();

@@ -6,11 +6,7 @@ class HoroscopoCommand extends Service {
     super();
     this._command = "!horoscopo";
   }
-
-  get command() {
-    return this._command;
-  }
-
+  
   cleanText(text) {
     return text.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
   }

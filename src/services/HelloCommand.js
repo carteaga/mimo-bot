@@ -5,11 +5,7 @@ class HelloCommand extends Service {
     super();
     this._command = "!hello";
   }
-
-  get command() {
-    return this._command;
-  }
-
+  
   async execute({ command, params, context, client }) {
     const {
       sender: { pushname },

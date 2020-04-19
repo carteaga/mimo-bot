@@ -16,10 +16,6 @@ class CaracolaCommand extends Service {
     ];
   }
 
-  get command() {
-    return this._command;
-  }
-
   async execute({ command, params, context, client }) {
     const {
       sender: { pushname },

@@ -12,10 +12,6 @@ class ImageToSticker extends Service {
     this._types = ["image"];
   }
 
-  get command() {
-    return this._command;
-  }
-
   async execute({ command, params, context, client }) {
     const {
       mimetype,

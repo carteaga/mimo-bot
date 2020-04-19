@@ -9,10 +9,6 @@ class IsAliveCommand extends Service {
     this._start = moment();
   }
 
-  get command() {
-    return this._command;
-  }
-
   async execute({ command, params, context, client }) {
     const { from } = context;
     const end = new Date();

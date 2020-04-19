@@ -9,10 +9,6 @@ class FeriadoCommand extends Service {
     this._command = "!feriado";
   }
 
-  get command() {
-    return this._command;
-  }
-
   isHolidayValid(date) {
     return function filter(holiday) {
       const dateHoliday = moment(holiday.fecha);

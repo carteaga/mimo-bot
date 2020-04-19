@@ -8,10 +8,6 @@ class PokemonCommand extends Service {
     this._command = "!poke";
   }
 
-  get command() {
-    return this._command;
-  }
-
   async getImagePokemon(url) {
     const img = await getUrl(url, { responseType: "arraybuffer" });
     if (img) {

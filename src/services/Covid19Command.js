@@ -8,10 +8,6 @@ class Covid19Command extends Service {
     this._command = "!covid";
   }
 
-  get command() {
-    return this._command;
-  }
-
   cleanText(text) {
     return text.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
   }

@@ -6,10 +6,6 @@ class RollCommand extends Service {
     this._command = "!roll";
   }
 
-  get command() {
-    return this._command;
-  }
-
   async execute({ command, params, context, client }) {
     const {
       sender: { pushname },
