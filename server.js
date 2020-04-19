@@ -21,10 +21,6 @@ async function processMessage(message) {
   const commandRegex = /^!.*/;
   const rawMessage = type != "chat" ? caption : body;
 
-  console.log("type message:", message.type);
-  console.log("mimetype:", message.mimetype);
-  console.log("body:", rawMessage);
-
   if (regex.test(rawMessage)) {
     let messageProcessed = rawMessage;
 
