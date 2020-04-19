@@ -1,8 +1,8 @@
-const sulla = require('@open-wa/wa-automate');
+const sulla = require("@open-wa/wa-automate");
 const CommandParser = require("./src/CommandParser");
 const commandOrquester = require("./src/InitCommand");
 const express = require("express");
-const { config } = require("./src/config/index");
+const { config, configBot } = require("./src/config/index");
 const debug = require("debug")("app:server");
 const LuisParser = require("./src/LuisParsers");
 
@@ -15,59 +15,62 @@ app.use(express.json());
 
 let clientGlobal;
 
+async function processMessage(message) {
+  const { body, from, type, caption, chatId } = message;
+  const regex = /(^!.*)|(mbot|bot|mimo-bot|mimo\s+bot)/i;
+  const commandRegex = /^!.*/;
+  const rawMessage = type != "chat" ? caption : body;
+
+  console.log("type message:", message.type);
+  console.log("mimetype:", message.mimetype);
+  console.log("body:", rawMessage);
+
+  if (regex.test(rawMessage)) {
+    let messageProcessed = rawMessage;
+
+    if (!commandRegex.test(rawMessage)) {
+      messageProcessed = await luisParser.parser(rawMessage);
+    }
+
+    const { command, params } = commandParser.parser(messageProcessed);
+    debug(
+      `- ${from} envia: ${rawMessage} (${type}) = commando "${command}", parametros [${params}]`
+    );
+
+    await commandOrquester.execute({
+      command,
+      params,
+      type,
+      context: message,
+      client: clientGlobal,
+    });
+  }
+
+  await clientGlobal.sendSeen(chatId);
+}
+
 async function start(client) {
   clientGlobal = client;
 
-  client.onStateChanged(state => {
+  client.onStateChanged((state) => {
     console.log("statechanged", state);
     if (state === "CONFLICT") client.forceRefocus();
   });
 
-  client.onMessage(async message => {
-    try {
-      const { body, from, type } = message;
-      if (type == "chat") {
-        const regex = /(^!.*)|(mbot|bot|mimo-bot|mimo\s+bot)/i;
-        const commandRegex = /^!.*/;
-        if (regex.test(body)) {
-          let messageProcessed = body;
-
-          if (!commandRegex.test(body)) {
-            messageProcessed = await luisParser.parser(body);
-          }
-
-          const { command, params } = commandParser.parser(messageProcessed);
-          debug(
-            `- ${from} envia: ${body} = commando "${command}", parametros [${params}]`
-          );
-          await commandOrquester.execute({
-            command,
-            params,
-            context: message,
-            client
-          });
-        }
-      }
-      await client.sendSeen(message.chatId);
-    } catch (err) {
-      console.log(err);
-    }
-  });
+  try {
+    await client.onMessage(processMessage);
+  } catch (err) {
+    console.log(err);
+  }
 }
 
 sulla
   .create("session", {
-    throwErrorOnTosBlock: true,
-    headless: !config.dev,
-    autoRefresh: true,
-    qrRefreshS: 15,
-    killTimer: 40,
-    cacheEnabled: false,
-    devtools: config.dev,
-    blockCrashLogs: true
+    ...configBot,
+    restartOnCrash: start,
   })
-  .then(async client => await start(client))
-  .catch(e => {
+  .then(async (client) => await start(client))
+  .catch((e) => {
     console.log("error", e);
   });
 
@@ -75,7 +78,7 @@ app.get("/", async (req, res) => {
   return res.sendFile("./index.html", { root: __dirname });
 });
 
-app.listen(config.port, function() {
+app.listen(config.port, function () {
   debug(`Example app listening on port ${config.port}!`);
 });
 

@@ -11,6 +11,18 @@ const config = {
   youtubeKey: process.env.YOUTUBE_KEY
 }
 
+const configBot = {
+  throwErrorOnTosBlock: true,
+  headless: !config.dev,
+  autoRefresh: true,
+  qrRefreshS: 15,
+  killTimer: 40,
+  cacheEnabled: false,
+  devtools: config.dev,
+  blockCrashLogs: true
+}
+
 module.exports = {
-  config
+  config,
+  configBot
 }
