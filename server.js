@@ -1,8 +1,17 @@
 const sulla = require("@open-wa/wa-automate");
-const { configBot } = require("./src/config/index");
+const { configBot, config } = require("./src/config/index");
 const processMessage = require("./src/processMessage");
-const moment = require("moment");
-moment.locale("es");
+const debug = require("debug")("app:server");
+const express = require("express");
+const app = express();
+
+app.get("/", async (req, res) => {
+  return res.sendFile("./index.html", { root: __dirname });
+});
+
+app.listen(config.port, function () {
+  debug(`Example app listening on port ${config.port}!`);
+});
 
 async function start(client) {
   clientGlobal = client;
