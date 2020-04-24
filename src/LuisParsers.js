@@ -1,5 +1,6 @@
 const { getUrl } = require("../utils/getUrl");
 const { config } = require("./config/index");
+const debug = require("debug")("app:luis");
 
 class LuisParser {
   async parser(message) {
@@ -14,6 +15,7 @@ class LuisParser {
   }
 
   getIntention(response) {
+    debug('Luis result:', response.topScoringIntent);
     const {
       query, 
       topScoringIntent: {
