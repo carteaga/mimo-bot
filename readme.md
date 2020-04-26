@@ -14,7 +14,7 @@ Un celular con un número disponible para whatsapp,  esto es porque dado que el 
 4. Escanear código QR con el celular que ocupara el bot
 5. Escribir !hello a través de whatsapp al número que inicio whatsapp
 
-## ejemplos de comandos implementados
+## Ejemplos de comandos implementados
 
 !horoscopo sagitario: Entrega el horoscopo de sagitario
 
