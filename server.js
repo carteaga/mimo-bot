@@ -1,11 +1,13 @@
 const sulla = require("@open-wa/wa-automate");
 const { configBot, config } = require("./src/config/index");
 const processMessage = require("./src/processMessage");
-const commandOrchestrator = require("./InitCommand");
-const CommandParser = require("./CommandParser");
+const commandOrchestrator = require("./src/InitCommand");
+const CommandParser = require("./src/CommandParser");
 const debug = require("debug")("app:server");
 const express = require("express");
 const app = express();
+
+const commandParser = new CommandParser();
 
 app.get("/", async (req, res) => {
   return res.sendFile("./index.html", { root: __dirname });
@@ -21,9 +23,8 @@ async function start(client) {
     if (state === "CONFLICT") client.forceRefocus();
   });
 
-  const commandParser = new CommandParser();
-  await client.onMessage((message) =>
-    processMessage({ 
+  await client.onMessage(async (message) =>
+    await processMessage({ 
       message, 
       client, 
       commandParser, 

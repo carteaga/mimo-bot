@@ -1,4 +1,4 @@
-const { getUrl } = require("../../utils/getUrl");
+const { getUrl } = require("../utils/getUrl");
 const numeral = require("numeral");
 const Service = require("../Service");
 

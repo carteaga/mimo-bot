@@ -1,5 +1,5 @@
 const Service = require("../Service");
-const { getUrl } = require("../../utils/getUrl");
+const { getUrl } = require("../utils/getUrl");
 const moment = require("moment");
 moment.locale("es");
 

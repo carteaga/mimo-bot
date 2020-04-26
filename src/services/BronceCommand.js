@@ -1,4 +1,4 @@
-const phrases = require('../../utils/phrases');
+const phrases = require('../utils/phrases');
 const Service = require("../Service");
 
 class BronceCommand extends Service {

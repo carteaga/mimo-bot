@@ -1,4 +1,4 @@
-const { getUrl } = require("../../utils/getUrl");
+const { getUrl } = require("../utils/getUrl");
 const Service = require("../Service");
 
 class ChuckPhrasesCommand extends Service {

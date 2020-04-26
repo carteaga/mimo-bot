@@ -3,7 +3,12 @@ const debug = require("debug")("app:server");
 
 const luisParser = new LuisParser();
 
-async function processMessage({ message, client, orchestrator, parser }) {
+async function processMessage({
+  message,
+  client,
+  commandOrchestrator,
+  commandParser,
+}) {
   const { body, from, type, caption, chatId } = message;
   const regex = /(^!.*)|(mbot|bot|mimo-bot|mimo\s+bot)/i;
   const commandRegex = /^!.*/;
@@ -16,12 +21,12 @@ async function processMessage({ message, client, orchestrator, parser }) {
       messageProcessed = await luisParser.parser(rawMessage);
     }
 
-    const { command, params } = parser(messageProcessed);
+    const { command, params } = commandParser.parser(messageProcessed);
     debug(
       `- ${from} envia: ${rawMessage} (${type}) = commando "${command}", parametros [${params}]`
     );
 
-    await orchestrator.execute({
+    await commandOrchestrator.execute({
       command,
       params,
       type,

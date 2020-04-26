@@ -1,5 +1,5 @@
 const Service = require("../Service");
-const { getUrl } = require("../../utils/getUrl");
+const { getUrl } = require("../utils/getUrl");
 const { Buffer } = require("buffer");
 
 class PokemonCommand extends Service {

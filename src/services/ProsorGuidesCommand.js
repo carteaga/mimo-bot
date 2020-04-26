@@ -1,6 +1,6 @@
 const Service = require("../Service");
 const querystring = require("querystring");
-const { getUrl } = require("../../utils/getUrl");
+const { getUrl } = require("../utils/getUrl");
 const numeral = require("numeral");
 const moment = require("moment");
 moment.locale("es");
