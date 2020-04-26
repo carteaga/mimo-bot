@@ -1,12 +1,9 @@
 const LuisParser = require("./LuisParsers");
-const commandOrquester = require("./InitCommand");
-const CommandParser = require("./CommandParser");
 const debug = require("debug")("app:server");
 
-const commandParser = new CommandParser();
 const luisParser = new LuisParser();
 
-async function processMessage(message, client) {
+async function processMessage({ message, client, orchestrator, parser }) {
   const { body, from, type, caption, chatId } = message;
   const regex = /(^!.*)|(mbot|bot|mimo-bot|mimo\s+bot)/i;
   const commandRegex = /^!.*/;
@@ -19,17 +16,17 @@ async function processMessage(message, client) {
       messageProcessed = await luisParser.parser(rawMessage);
     }
 
-    const { command, params } = commandParser.parser(messageProcessed);
+    const { command, params } = parser(messageProcessed);
     debug(
       `- ${from} envia: ${rawMessage} (${type}) = commando "${command}", parametros [${params}]`
     );
 
-    await commandOrquester.execute({
+    await orchestrator.execute({
       command,
       params,
       type,
       context: message,
-      client
+      client,
     });
   }
 

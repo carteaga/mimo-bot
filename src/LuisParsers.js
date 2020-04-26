@@ -1,4 +1,4 @@
-const { getUrl } = require("../utils/getUrl");
+const { getUrl } = require("./utils/getUrl");
 const { config } = require("./config/index");
 const debug = require("debug")("app:luis");
 

@@ -1,4 +1,4 @@
-const { getUrl } = require("../utils/getUrl");
+const { getUrl } = require("./utils/getUrl");
 
 class CommandParser {
   parser(message) {
