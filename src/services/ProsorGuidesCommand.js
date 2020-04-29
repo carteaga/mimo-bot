@@ -56,8 +56,7 @@ class ProsorGuides extends Service {
         ".*" + searchText.replace(" ", "\\s{0,}") + ".*",
         "gmi"
       );
-      console.log(regex)
-      console.log(items.length)
+
       const itemsFiltered = items
         .filter((item) => regex.test(item.snippet.title))
         .slice(0, 3);
