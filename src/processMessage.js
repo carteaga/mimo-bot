@@ -25,7 +25,7 @@ async function processMessage({
     debug(
       `- ${from} envia: ${rawMessage} (${type}) = commando "${command}", parametros [${params}]`
     );
-    
+
     await client.simulateTyping(message.from, true);
     await commandOrchestrator.execute({
       command,

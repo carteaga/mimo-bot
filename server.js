@@ -12,7 +12,6 @@ sulla
   })
   .then(async (client) => {
     await startBot(client);
-    clientGlobal = client;
   })
   .catch((e) => {
     console.log("error", e);
