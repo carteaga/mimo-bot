@@ -25,7 +25,8 @@ async function processMessage({
     debug(
       `- ${from} envia: ${rawMessage} (${type}) = commando "${command}", parametros [${params}]`
     );
-
+    
+    await client.simulateTyping(message.from, true);
     await commandOrchestrator.execute({
       command,
       params,
@@ -33,6 +34,7 @@ async function processMessage({
       context: message,
       client,
     });
+    await client.simulateTyping(message.from, false);
   }
 
   await client.sendSeen(chatId);
