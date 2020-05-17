@@ -16,7 +16,7 @@ class FlipCoin extends Service {
 
     await client.sendText(
       from,
-      `${pushname} lanzó la moneda, ha salido: *${coin}*`
+      `${pushname} lanzó una moneda, ha salido: *${coin}*`
     );
   }
 }

@@ -9,7 +9,7 @@ async function processMessage({
   commandOrchestrator,
   commandParser,
 }) {
-  const { body, from, type, caption, chatId } = message;
+  const { body, from, type, caption, chatId, id } = message;
   const regex = /(^!.*)|(mbot|bot|mimo-bot|mimo\s+bot)/i;
   const commandRegex = /^!.*/;
   const rawMessage = type != "chat" ? caption : body;
@@ -38,6 +38,7 @@ async function processMessage({
   }
 
   await client.sendSeen(chatId);
+  await client.deleteMessage(from, id, false);
 }
 
 module.exports = processMessage;

@@ -17,6 +17,10 @@ async function start(client) {
     if (state === "CONFLICT") client.forceRefocus();
   });
 
+  client.onAnyMessage((message) => {
+    
+  });
+
   pingPhone(client, config.phonePing, config.timePing);
 
   await client.onMessage(

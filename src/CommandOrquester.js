@@ -14,7 +14,7 @@ class CommandOrchestrator {
         cmd.execute(config);
       }
     });
-    Promise.all(promises);
+    return Promise.all(promises);
   }
 }
 
