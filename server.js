@@ -1,12 +1,13 @@
-const sulla = require("@open-wa/wa-automate");
-const { configBot, config } = require("./src/config/index");
-const debug = require("debug")("app:server");
-const express = require("express");
+const sulla = require('@open-wa/wa-automate');
+const debug = require('debug')('app:server');
+const express = require('express');
+const { configBot, config } = require('./src/config/index');
+const startBot = require('./src/startBot');
+
 const app = express();
-const startBot = require("./src/startBot");
 
 sulla
-  .create("session", {
+  .create('session', {
     ...configBot,
     restartOnCrash: startBot,
   })
@@ -14,13 +15,13 @@ sulla
     await startBot(client);
   })
   .catch((e) => {
-    console.log("error", e);
+    console.log('error', e);
   });
 
-app.get("/", async (req, res) => {
-  return res.sendFile("./index.html", { root: __dirname });
+app.get('/', async (req, res) => {
+  return res.sendFile('./index.html', { root: __dirname });
 });
 
-app.listen(config.port, function () {
+app.listen(config.port, () => {
   debug(`Example app listening on port ${config.port}!`);
 });
