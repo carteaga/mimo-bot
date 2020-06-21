@@ -1,15 +1,15 @@
-const { getUrl } = require("../utils/getUrl");
-const Service = require("../Service");
+const { getUrl } = require('../utils/getUrl');
+const Service = require('../Service');
 
 class ChuckPhrasesCommand extends Service {
   constructor() {
     super();
-    this._command = "!chuck";
+    this.command = '!chuck';
   }
 
-  async execute({ command, params, context, client }) {
+  async execute({ context, client }) {
     const { from } = context;
-    const data = await getUrl("https://api.chucknorris.io/jokes/random");
+    const data = await getUrl('https://api.chucknorris.io/jokes/random');
     await client.sendText(from, `${data.value}`);
   }
 }

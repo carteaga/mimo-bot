@@ -1,43 +1,39 @@
-const Service = require("../Service");
-const { getUrl } = require("../utils/getUrl");
+const Service = require('../Service');
+const { getUrl } = require('../utils/getUrl');
 
 class TransantiagoCommand extends Service {
   constructor() {
     super();
-    this._command = "!tran";
+    this.command = '!tran';
   }
 
-  get command() {
-    return this._command;
-  }
-
-  async execute({ command, params, context, client }) {
+  async execute({ params, context, client }) {
     const { from } = context;
-    const busStop = params[0] || "";
-    let msg = "Me falta saber el paradero, ej: !tran pa440";
+    const busStop = params[0] || '';
+    let msg = 'Me falta saber el paradero, ej: !tran pa440';
 
-    if (busStop != "") {
+    if (busStop !== '') {
       const response = await getUrl(
         `https://api.adderou.cl/ts/?paradero=${busStop}`
       );
       if (response) {
         const { id, servicios, descripcion } = response;
 
-        if (id != "NULL") {
+        if (id !== 'NULL') {
           msg = `🚏${id} ${descripcion}\n`;
-          servicios.forEach(data => {
+          servicios.forEach((data) => {
             const { servicio, valido } = data;
 
-            if (valido == 1) {
+            if (valido === 1) {
               const { tiempo, patente } = data;
               msg += `🚍${servicio} [${patente}]: ${tiempo}\n`;
             } else msg += `🚍${servicio}: fuera de servicio\n`;
           });
         } else {
-          msg = "No conozco ese paradero.";
+          msg = 'No conozco ese paradero.';
         }
       } else {
-        msg = "No está disponible el servicio, lo siento.";
+        msg = 'No está disponible el servicio, lo siento.';
       }
     }
 

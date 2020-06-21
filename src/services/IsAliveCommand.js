@@ -1,19 +1,18 @@
-const Service = require("../Service");
 const moment = require('moment');
+const Service = require('../Service');
+
 moment.locale('es');
 
 class IsAliveCommand extends Service {
   constructor() {
     super();
-    this._command = "!alive";
-    this._start = moment();
+    this.command = '!alive';
+    this.start = moment();
   }
 
-  async execute({ command, params, context, client }) {
+  async execute({ context, client }) {
     const { from } = context;
-    const end = new Date();
-
-    await client.sendText(from, `Estoy vivo ${this._start.fromNow()}`);
+    await client.sendText(from, `Estoy vivo ${this.start.fromNow()}`);
   }
 }
 

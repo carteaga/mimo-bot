@@ -1,11 +1,11 @@
 class Service {
   constructor() {
-    this._command = "";
-    this._types = ["chat"];
+    this.command = '';
+    this.types = ['chat'];
   }
 
-  match(command, type, params) {
-    return this._command == command && this._types.indexOf(type) > -1;
+  match({ command, type }) {
+    return this.command === command && this.types.indexOf(type) > -1;
   }
 }
 

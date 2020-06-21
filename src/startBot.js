@@ -1,9 +1,9 @@
-const processMessage = require("./processMessage");
-const commandOrchestrator = require("./InitCommand");
-const CommandParser = require("./CommandParser");
-const pingPhone = require("./PingPhone");
-const { config } = require("./config/index");
-const { default: PQueue } = require("p-queue");
+const { default: PQueue } = require('p-queue');
+const commandOrchestrator = require('./InitCommand');
+const CommandParser = require('./CommandParser');
+const pingPhone = require('./PingPhone');
+const { config } = require('./config/index');
+const processMessage = require('./processMessage');
 
 async function start(client) {
   const commandParser = new CommandParser();
@@ -13,26 +13,21 @@ async function start(client) {
   });
 
   client.onStateChanged((state) => {
-    console.log("statechanged", state);
-    if (state === "CONFLICT") client.forceRefocus();
-  });
-
-  client.onAnyMessage((message) => {
-    
+    console.log('statechanged', state);
+    if (state === 'CONFLICT') client.forceRefocus();
   });
 
   pingPhone(client, config.phonePing, config.timePing);
 
-  await client.onMessage(
-    async (message) =>
-      await queue.add(
-        processMessage({
-          message,
-          client,
-          commandParser,
-          commandOrchestrator,
-        })
-      )
+  await client.onMessage(async (message) =>
+    queue.add(
+      processMessage({
+        message,
+        client,
+        commandParser,
+        commandOrchestrator,
+      })
+    )
   );
 }
 

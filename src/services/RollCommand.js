@@ -1,19 +1,22 @@
-const Service = require("../Service");
+const Service = require('../Service');
 
 class RollCommand extends Service {
   constructor() {
     super();
-    this._command = "!roll";
+    this.command = '!roll';
   }
 
-  async execute({ command, params, context, client }) {
+  async execute({ params, context, client }) {
     const {
       sender: { pushname },
-      from
+      from,
     } = context;
-    const number = Number.parseInt(params[0]) || 6;
+    const number = Number.parseInt(params[0], 10) || 6;
     const result = Math.floor(Math.random() * number) + 1;
-    await client.sendText(from, `🎲${pushname} has lanzado ${result} de ${number}`); 
+    await client.sendText(
+      from,
+      `🎲${pushname} has lanzado ${result} de ${number}`
+    );
   }
 }
 

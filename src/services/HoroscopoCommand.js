@@ -1,38 +1,38 @@
-const Service = require("../Service");
-const { getUrl } = require("../utils/getUrl");
+const Service = require('../Service');
+const { getUrl } = require('../utils/getUrl');
 
 class HoroscopoCommand extends Service {
   constructor() {
     super();
-    this._command = "!horoscopo";
-  }
-  
-  cleanText(text) {
-    return text.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+    this.command = '!horoscopo';
   }
 
-  async execute({ command, params, context, client }) {
+  cleanText(text) {
+    return text.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+  }
+
+  async execute({ params, context, client }) {
     const { from } = context;
     const signs = [
-      "aries",
-      "tauro",
-      "geminis",
-      "cancer",
-      "leo",
-      "libra",
-      "escorpion",
-      "sagitario",
-      "capricornio",
-      "acuario",
-      "piscis"
+      'aries',
+      'tauro',
+      'geminis',
+      'cancer',
+      'leo',
+      'libra',
+      'escorpion',
+      'sagitario',
+      'capricornio',
+      'acuario',
+      'piscis',
     ];
 
-    let sign = params.length ? params[0] : "";
+    let sign = params.length ? params[0] : '';
     sign = this.cleanText(sign).toLowerCase();
-    let msg = "🤷‍♂️";
+    let msg = '🤷‍♂️';
 
     if (signs.indexOf(sign) > -1) {
-      const response = await getUrl("https://api.adderou.cl/tyaas/");
+      const response = await getUrl('https://api.adderou.cl/tyaas/');
       if (response) {
         const { horoscopo } = response;
         const data = horoscopo[sign];
@@ -44,10 +44,10 @@ class HoroscopoCommand extends Service {
           `⚕️: ${data.salud}`,
           `💰: ${data.dinero}`,
           `🎨: ${data.color}`,
-          `🔢: ${data.numero}`
-        ].join("\n\r");
+          `🔢: ${data.numero}`,
+        ].join('\n\r');
       } else {
-        msg = "No hay horóscopo";
+        msg = 'No hay horóscopo';
       }
     }
 

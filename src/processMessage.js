@@ -1,5 +1,6 @@
-const LuisParser = require("./LuisParsers");
-const debug = require("debug")("app:server");
+const debug = require('debug')('app:server');
+const LuisParser = require('./LuisParsers');
+
 
 const luisParser = new LuisParser();
 
@@ -12,7 +13,7 @@ async function processMessage({
   const { body, from, type, caption, chatId, id } = message;
   const regex = /(^!.*)|(mbot|bot|mimo-bot|mimo\s+bot)/i;
   const commandRegex = /^!.*/;
-  const rawMessage = type != "chat" ? caption : body;
+  const rawMessage = type !== 'chat' ? caption : body;
 
   if (regex.test(rawMessage)) {
     let messageProcessed = rawMessage;

@@ -1,17 +1,17 @@
-const Service = require("../Service");
+const Service = require('../Service');
 
 class HelloCommand extends Service {
   constructor() {
     super();
-    this._command = "!hello";
+    this.command = '!hello';
   }
-  
-  async execute({ command, params, context, client }) {
+
+  async execute({ params, context, client }) {
     const {
       sender: { pushname },
-      from
+      from,
     } = context;
-    const name = params.length ? params.join(" ") : pushname;
+    const name = params.length ? params.join(' ') : pushname;
     await client.sendText(from, `🤖🖐 Hola ${name}`);
   }
 }

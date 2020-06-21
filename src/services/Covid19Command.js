@@ -1,19 +1,19 @@
-const { getUrl } = require("../utils/getUrl");
-const numeral = require("numeral");
-const Service = require("../Service");
+const numeral = require('numeral');
+const { getUrl } = require('../utils/getUrl');
+const Service = require('../Service');
 
 class Covid19Command extends Service {
   constructor() {
     super();
-    this._command = "!covid";
+    this.command = '!covid';
   }
 
   cleanText(text) {
-    return text.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+    return text.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
   }
 
   formatNumber(number) {
-    return numeral(number).format("0,0");
+    return numeral(number).format('0,0');
   }
 
   generateMsgAllCases(response) {
@@ -22,35 +22,35 @@ class Covid19Command extends Service {
       `Casos: ${this.formatNumber(response.cases)}`,
       `Muertes: ${this.formatNumber(response.deaths)}`,
       `Recuperados: ${this.formatNumber(response.recovered)}`,
-    ].join("\n");
+    ].join('\n');
   }
 
   generateCountryMessage(response) {
-    const country = response.country,
-      cases = this.formatNumber(response.cases),
-      todayCases = this.formatNumber(response.todayCases),
-      deaths = this.formatNumber(response.deaths),
-      todayDeaths = this.formatNumber(response.todayDeaths),
-      active = this.formatNumber(response.active),
-      recovered = this.formatNumber(response.recovered),
-      critical = this.formatNumber(response.critical);
+    const { country } = response;
+    const cases = this.formatNumber(response.cases);
+    const todayCases = this.formatNumber(response.todayCases);
+    const deaths = this.formatNumber(response.deaths);
+    const todayDeaths = this.formatNumber(response.todayDeaths);
+    const active = this.formatNumber(response.active);
+    const recovered = this.formatNumber(response.recovered);
+    const critical = this.formatNumber(response.critical);
 
     return [
       `Resumen de ${country}`,
       `Casos: ${cases} | Hoy: ${todayCases} | Activos: ${active}`,
       `Muertes: ${deaths} | Hoy: ${todayDeaths}`,
       `Recuperados: ${recovered} | Criticos: ${critical}`,
-    ].join("\n");
+    ].join('\n');
   }
 
-  async execute({ command, params, context, client }) {
+  async execute({ params, context, client }) {
     const { from } = context;
-    const resource = "https://coronavirus-19-api.herokuapp.com";
-    const country = params.join(" ") || "chile";
-    let msg = "";
+    const resource = 'https://coronavirus-19-api.herokuapp.com';
+    const country = params.join(' ') || 'chile';
+    let msg = '';
 
     const response =
-      country.toLowerCase() == "mundial"
+      country.toLowerCase() === 'mundial'
         ? await getUrl(`${resource}/all`)
         : await getUrl(
             `${resource}/countries/${encodeURI(
@@ -58,15 +58,15 @@ class Covid19Command extends Service {
             )}`
           );
 
-    if (response == "Country not found") {
-      msg = "No encontré el país, intentalo en inglés.";
-    } else if (response != "") {
+    if (response === 'Country not found') {
+      msg = 'No encontré el país, intentalo en inglés.';
+    } else if (response !== '') {
       msg =
-        country.toLowerCase() == "mundial"
+        country.toLowerCase() === 'mundial'
           ? this.generateMsgAllCases(response)
           : this.generateCountryMessage(response);
     } else {
-      msg = "No puedo obtener los datos solicitados.";
+      msg = 'No puedo obtener los datos solicitados.';
     }
 
     await client.sendText(from, msg);

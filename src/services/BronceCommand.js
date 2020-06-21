@@ -1,14 +1,13 @@
 const phrases = require('../utils/phrases');
-const Service = require("../Service");
+const Service = require('../Service');
 
 class BronceCommand extends Service {
-  
   constructor() {
     super();
-    this._command = "!bronce";
+    this.command = '!bronce';
   }
 
-  async execute({ command, params, context, client }) {
+  async execute({ context, client }) {
     const { from } = context;
     const randomNumber = Math.floor(Math.random() * phrases.length);
     const prhase = phrases[randomNumber];

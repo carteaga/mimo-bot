@@ -1,42 +1,41 @@
-const Service = require("../Service");
-const { getUrl } = require("../utils/getUrl");
-const { Buffer } = require("buffer");
+const { Buffer } = require('buffer');
+const Service = require('../Service');
+const { getUrl } = require('../utils/getUrl');
 
 class PokemonCommand extends Service {
   constructor() {
     super();
-    this._command = "!poke";
+    this.command = '!poke';
   }
 
   async getImagePokemon(url) {
-    const img = await getUrl(url, { responseType: "arraybuffer" });
+    const img = await getUrl(url, { responseType: 'arraybuffer' });
     if (img) {
-      return `data:image/png;base64,${Buffer.from(img, "binary").toString(
-        "base64"
+      return `data:image/png;base64,${Buffer.from(img, 'binary').toString(
+        'base64'
       )}`;
-    } else {
-      return undefined;
     }
+    return undefined;
   }
 
   formatResponsePokemon(data) {
     const { weight, types, height, name, abilities, id } = data;
     const abilitiesPokemon = abilities
       .map((info) => info.ability.name)
-      .join(", ");
-    const typesPokemon = types.map((info) => info.type.name).join(", ");
-    
+      .join(', ');
+    const typesPokemon = types.map((info) => info.type.name).join(', ');
+
     return [
       `#${id} *${name}* | Tipo(s): ${typesPokemon}`,
       `Pesa: ${weight / 10}kg | Mide: ${height / 10}m`,
       `Habilidades: ${abilitiesPokemon}`,
-    ].join("\n");
+    ].join('\n');
   }
 
-  async execute({ command, params, context, client }) {
+  async execute({ params, context, client }) {
     const { from } = context;
-    let idPokemon = params[0] || "";
-    idPokemon = isNaN(params[0])
+    let idPokemon = params[0] || '';
+    idPokemon = Number.isNaN(params[0])
       ? idPokemon.toLowerCase()
       : parseInt(idPokemon, 10);
     const request = `https://pokeapi.co/api/v2/pokemon/${idPokemon}`;
@@ -47,15 +46,17 @@ class PokemonCommand extends Service {
       await client.sendText(from, `Hay ${count} pokémon`);
     } else if (response) {
       const {
-        sprites: { front_default },
+        sprites: { front_default: frontDefault },
       } = response;
 
-      const img = await this.getImagePokemon(front_default);
+      const img = await this.getImagePokemon(frontDefault);
       const textFormated = this.formatResponsePokemon(response);
 
-      img
-        ? await client.sendImage(from, img, "img.png", textFormated)
-        : await client.sendText(from, textFormated);
+      if (img !== '') {
+        await client.sendImage(from, img, 'img.png', textFormated);
+      } else {
+        await client.sendText(from, textFormated);
+      }
     } else {
       await client.sendText(
         from,

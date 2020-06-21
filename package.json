@@ -7,7 +7,9 @@
     "dev": "cross-env DEBUG=express:*,app:* node server",
     "start": "cross-env NODE_ENV=production node server",
     "clean": "rm -rf session && rm -rf dist",
-    "clean:full": "rm -rf node_modules && npm run clean"
+    "clean:full": "rm -rf node_modules && npm run clean",
+    "check-updates": "ncu",
+    "eslint": "eslint ./src"
   },
   "engines": {
     "node": ">=12.14.1",
@@ -19,13 +21,20 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@open-wa/wa-automate": "^1.9.25",
+    "@open-wa/wa-automate": "^1.9.76",
     "axios": "^0.19.2",
     "cross-env": "^7.0.2",
+    "debug": "^4.1.1",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
-    "moment": "^2.25.3",
+    "moment": "^2.27.0",
     "numeral": "^2.0.6",
     "p-queue": "^6.4.0"
+  },
+  "devDependencies": {
+    "eslint": "7.2.0",
+    "eslint-config-airbnb-base": "^14.2.0",
+    "eslint-plugin-import": "^2.21.2",
+    "eslint-prettier-config": "^1.0.1"
   }
 }

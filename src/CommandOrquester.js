@@ -7,14 +7,9 @@ class CommandOrchestrator {
     this.commands.push(command);
   }
 
-  async execute(config) {
-    const { command, params, type } = config;
-    const promises = this.commands.map((cmd) => {
-      if (cmd.match(command, type, params)) {
-        cmd.execute(config);
-      }
-    });
-    return Promise.all(promises);
+  execute(config) {
+    const matches = this.commands.filter((cmd) => cmd.match(config));
+    return Promise.all(matches.map((cmd) => cmd.execute(config)));
   }
 }
 

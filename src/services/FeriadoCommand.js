@@ -1,12 +1,13 @@
-const Service = require("../Service");
-const { getUrl } = require("../utils/getUrl");
-const moment = require("moment");
-moment.locale("es");
+const moment = require('moment');
+const Service = require('../Service');
+const { getUrl } = require('../utils/getUrl');
+
+moment.locale('es');
 
 class FeriadoCommand extends Service {
   constructor() {
     super();
-    this._command = "!feriado";
+    this.command = '!feriado';
   }
 
   isHolidayValid(date) {
@@ -16,15 +17,15 @@ class FeriadoCommand extends Service {
     };
   }
 
-  async execute({ command, params, context, client }) {
+  async execute({ params, context, client }) {
     const currentDate = moment();
     const { from } = context;
     const year = currentDate.year();
     const response = await getUrl(
       `https://apis.digital.gob.cl/fl/feriados/${year}`
     );
-    let msg = "No puedo ver los feriados, lo siento.";
-    let limitHolidays = Number.parseInt(params[0]) || 5;
+    let msg = 'No puedo ver los feriados, lo siento.';
+    let limitHolidays = Number.parseInt(params[0], 10) || 5;
 
     if (response) {
       const maxHolidays = response.length;
@@ -37,22 +38,22 @@ class FeriadoCommand extends Service {
         .filter(this.isHolidayValid(currentDate))
         .slice(0, limitHolidays);
 
-      msg = `Próximos ${limitHolidays || ""} feriados\n`;
-      holidayRemaining.forEach(holiday => {
+      msg = `Próximos ${limitHolidays || ''} feriados\n`;
+      holidayRemaining.forEach((holiday) => {
         const { nombre, fecha, irrenunciable, tipo } = holiday;
-        const isReligious = tipo == "Religioso" ? "Si" : "No";
-        const isRenunciable = irrenunciable == 1 ? "Si" : "No";
+        const isReligious = tipo === 'Religioso' ? 'Si' : 'No';
+        const isRenunciable = irrenunciable === 1 ? 'Si' : 'No';
         const date = moment(fecha);
 
         msg += [
           `*${date.format(
-            "D-MMM (dd)"
+            'D-MMM (dd)'
           )}* \t_Rel? ${isReligious}\tRen? ${isRenunciable}_`,
           `\`\`\`"${nombre}"\`\`\``,
           `\`\`\`(faltan ${date.fromNow(true)})\`\`\``,
-          "",
-          ""
-        ].join("\n");
+          '',
+          '',
+        ].join('\n');
       });
     }
 
