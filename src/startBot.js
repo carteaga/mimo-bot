@@ -13,6 +13,7 @@ async function start(client) {
   });
 
   client.onStateChanged((state) => {
+    // eslint-disable-next-line no-console
     console.log('statechanged', state);
     if (state === 'CONFLICT') client.forceRefocus();
   });

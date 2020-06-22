@@ -15,6 +15,7 @@ sulla
     await startBot(client);
   })
   .catch((e) => {
+    // eslint-disable-next-line no-console
     console.log('error', e);
   });
 
