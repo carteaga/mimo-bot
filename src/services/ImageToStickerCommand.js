@@ -15,8 +15,8 @@ class ImageToSticker extends Service {
     const { mimetype, from } = context;
     const mediaData = await decryptMedia(context, uaOverride);
     await client.sendImageAsSticker(
-      `data:${mimetype};base64,${mediaData.toString('base64')}`,
-      from
+      from,
+      `data:${mimetype};base64,${mediaData.toString('base64')}`
     );
   }
 }
