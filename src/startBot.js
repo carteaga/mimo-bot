@@ -4,8 +4,9 @@ const CommandParser = require('./CommandParser');
 const pingPhone = require('./PingPhone');
 const { config } = require('./config/index');
 const processMessage = require('./processMessage');
+const errorHandler = require('./errorHandler');
 
-async function start(client) {
+function start(client) {
   const commandParser = new CommandParser();
   const queue = new PQueue({
     concurrency: 4,
@@ -20,13 +21,14 @@ async function start(client) {
 
   pingPhone(client, config.phonePing, config.timePing);
 
-  await client.onMessage(async (message) =>
+  client.onMessage((message) =>
     queue.add(
       processMessage({
         message,
         client,
         commandParser,
         commandOrchestrator,
+        errorHandler,
       })
     )
   );

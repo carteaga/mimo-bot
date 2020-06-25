@@ -21,7 +21,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@open-wa/wa-automate": "^1.9.76",
+    "@open-wa/wa-automate": "^1.9.81",
     "axios": "^0.19.2",
     "cross-env": "^7.0.2",
     "debug": "^4.1.1",
@@ -29,10 +29,11 @@
     "express": "^4.17.1",
     "moment": "^2.27.0",
     "numeral": "^2.0.6",
-    "p-queue": "^6.4.0"
+    "p-queue": "^6.4.0",
+    "pretty-error": "^2.1.1"
   },
   "devDependencies": {
-    "eslint": "7.2.0",
+    "eslint": "7.3.1",
     "eslint-config-airbnb-base": "^14.2.0",
     "eslint-plugin-import": "^2.21.2",
     "eslint-prettier-config": "^1.0.1"

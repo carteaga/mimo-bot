@@ -1,7 +1,6 @@
 const debug = require('debug')('app:server');
 const LuisParser = require('./LuisParsers');
 
-
 const luisParser = new LuisParser();
 
 async function processMessage({
@@ -9,6 +8,7 @@ async function processMessage({
   client,
   commandOrchestrator,
   commandParser,
+  errorHandler
 }) {
   const { body, from, type, caption, chatId, id } = message;
   const regex = /(^!.*)|(mbot|bot|mimo-bot|mimo\s+bot)/i;
@@ -27,19 +27,25 @@ async function processMessage({
       `- ${from} envia: ${rawMessage} (${type}) = commando "${command}", parametros [${params}]`
     );
 
-    await client.simulateTyping(message.from, true);
-    await commandOrchestrator.execute({
-      command,
-      params,
-      type,
-      context: message,
-      client,
-    });
-    await client.simulateTyping(message.from, false);
+    try {
+      await client.simulateTyping(message.from, true);
+      await commandOrchestrator.execute({
+        command,
+        params,
+        type,
+        context: message,
+        client,
+      });
+    } catch(error) {
+      if(errorHandler) {
+        errorHandler(error, client, command, params);
+      }
+    } finally {
+      await client.simulateTyping(message.from, false);
+      await client.sendSeen(chatId);
+      await client.deleteMessage(from, id, false);
+    }
   }
-
-  await client.sendSeen(chatId);
-  await client.deleteMessage(from, id, false);
 }
 
 module.exports = processMessage;
