@@ -55,6 +55,7 @@ class HoroscopoCommand extends Service {
       `💰: ${data.dinero}`,
       `🎨: ${data.color}`,
       `🔢: ${data.numero}`,
+      '```creditos a Yolanda Sultana y a @eduardo```'
     ].join('\n\r');
   }
 
@@ -72,7 +73,7 @@ class HoroscopoCommand extends Service {
       if (horoscopo) {
         msg = this.formatMessage(horoscopo[sign]);
       } else {
-        msg = 'Disculpa, no pude obtener el horóscopo.';
+        msg = 'Disculpame, no pude obtener el horóscopo.';
       }
     }
 
