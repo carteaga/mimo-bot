@@ -1,5 +1,5 @@
-const numeral = require('numeral');
 const { getUrl } = require('../utils/getUrl');
+const formatNumber = require('../utils/formatNumber');
 const Service = require('../Service');
 
 class Covid19Command extends Service {
@@ -12,28 +12,24 @@ class Covid19Command extends Service {
     return text.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
   }
 
-  formatNumber(number) {
-    return numeral(number).format('0,0');
-  }
-
   generateMsgAllCases(response) {
     return [
       `Resumen mundial`,
-      `Casos: ${this.formatNumber(response.cases)}`,
-      `Muertes: ${this.formatNumber(response.deaths)}`,
-      `Recuperados: ${this.formatNumber(response.recovered)}`,
+      `Casos: ${formatNumber(response.cases)}`,
+      `Muertes: ${formatNumber(response.deaths)}`,
+      `Recuperados: ${formatNumber(response.recovered)}`,
     ].join('\n');
   }
 
   generateCountryMessage(response) {
     const { country } = response;
-    const cases = this.formatNumber(response.cases);
-    const todayCases = this.formatNumber(response.todayCases);
-    const deaths = this.formatNumber(response.deaths);
-    const todayDeaths = this.formatNumber(response.todayDeaths);
-    const active = this.formatNumber(response.active);
-    const recovered = this.formatNumber(response.recovered);
-    const critical = this.formatNumber(response.critical);
+    const cases = formatNumber(response.cases);
+    const todayCases = formatNumber(response.todayCases);
+    const deaths = formatNumber(response.deaths);
+    const todayDeaths = formatNumber(response.todayDeaths);
+    const active = formatNumber(response.active);
+    const recovered = formatNumber(response.recovered);
+    const critical = formatNumber(response.critical);
 
     return [
       `Resumen de ${country}`,
