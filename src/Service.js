@@ -5,7 +5,10 @@ class Service {
   }
 
   match({ command, type }) {
-    return this.command === command && this.types.indexOf(type) > -1;
+    return (
+      this.command.toUpperCase() === command.toUpperCase() &&
+      this.types.indexOf(type) > -1
+    );
   }
 }
 
