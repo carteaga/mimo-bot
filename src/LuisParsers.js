@@ -1,10 +1,16 @@
 const debug = require('debug')('app:luis');
+const { escape } = require('querystring');
 const { getUrl } = require('./utils/getUrl');
 const { config } = require('./config/index');
 
 class LuisParser {
   async parser(message) {
-    const request = `${config.luisEndPoint}/apps/${config.luisAppId}?verbose=true&timezoneOffset=0&subscription-key=${config.luisKey}&q=${message}`;
+    const request = `${config.luisEndPoint}/apps/${
+      config.luisAppId
+    }?verbose=true&timezoneOffset=0&subscription-key=${
+      config.luisKey
+    }&q=${escape(message)}`;
+
     const response = await getUrl(request);
 
     if (!response) {
