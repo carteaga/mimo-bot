@@ -26,11 +26,7 @@ class MathExpressions extends Service {
       const result = evaluateMathExpression(expression);
       message = `${this.format(result)}`;
     } catch (error) {
-      if (error instanceof SyntaxError) {
-        message = 'Tu formula no es correcta, intenta nuevamente';
-      } else {
-        throw error;
-      }
+      message = 'Tu formula no es correcta, intenta nuevamente';
     }
 
     await client.reply(from, message, id);
