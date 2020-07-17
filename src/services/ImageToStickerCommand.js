@@ -32,7 +32,7 @@ class ImageToSticker extends Service {
 
   async imageToUrl(context, client, params) {
     const { from } = context;
-    const url = params[0];
+    const url = params[0] || '';
     const extension = this.getExtensionImageToUrl(url);
 
     if (extension === '') {
