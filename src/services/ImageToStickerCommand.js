@@ -1,6 +1,7 @@
 const { decryptMedia } = require('@open-wa/wa-automate');
 const Service = require('../Service');
 const { getUrl } = require('../utils/getUrl');
+
 const uaOverride =
   'WhatsApp/2.16.352 Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_1) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Safari/605.1.15';
 
@@ -66,14 +67,21 @@ class ImageToSticker extends Service {
   }
 
   async execute({ context, client, params }) {
-    const { type } = context;
+    const { type, quotedMsg, from } = context;
 
     switch (type) {
       case 'image':
         await this.imageToSticker(context, client);
         break;
       case 'chat':
-        await this.imageToUrl(context, client, params);
+        if (quotedMsg && quotedMsg.type === 'image') {
+          await this.imageToSticker({
+            ...quotedMsg,
+            from
+          }, client);
+        } else {
+          await this.imageToUrl(context, client, params);
+        }
         break;
       default:
         break;
