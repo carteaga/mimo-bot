@@ -12,8 +12,8 @@
     "eslint": "eslint ./src"
   },
   "engines": {
-    "node": ">=12.14.1",
-    "npm": ">=6.13.4"
+    "node": "12.14.1",
+    "npm": "6.13.4"
   },
   "keywords": [
     "heroku"
@@ -21,22 +21,22 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@open-wa/wa-automate": "^1.9.81",
-    "axios": "^0.19.2",
-    "cross-env": "^7.0.2",
-    "debug": "^4.1.1",
-    "dotenv": "^8.2.0",
-    "express": "^4.17.1",
-    "mathjs": "^7.0.2",
-    "moment": "^2.27.0",
-    "numeral": "^2.0.6",
-    "p-queue": "^6.4.0",
-    "pretty-error": "^2.1.1"
+    "@open-wa/wa-automate": "^1.9.105",
+    "axios": "0.20.0",
+    "cross-env": "7.0.2",
+    "debug": "4.1.1",
+    "dotenv": "8.2.0",
+    "express": "4.17.1",
+    "mathjs": "7.1.0",
+    "moment": "2.27.0",
+    "numeral": "2.0.6",
+    "p-queue": "6.6.1",
+    "pretty-error": "2.1.1"
   },
   "devDependencies": {
-    "eslint": "7.3.1",
-    "eslint-config-airbnb-base": "^14.2.0",
-    "eslint-plugin-import": "^2.21.2",
-    "eslint-prettier-config": "^1.0.1"
+    "eslint": "7.7.0",
+    "eslint-config-airbnb-base": "14.2.0",
+    "eslint-plugin-import": "2.22.0",
+    "eslint-prettier-config": "1.0.1"
   }
 }
