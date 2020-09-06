@@ -7,7 +7,7 @@ function pingPhone(client, phone, seconds) {
       try {
         await client.sendText(phone, `Enviando señales de vida`);
       } catch (err) {
-        debug('hubo un error loco ', err);
+        debug('hubo un error ', err);
       }
     }, seconds);
   } else {
