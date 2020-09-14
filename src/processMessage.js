@@ -8,7 +8,7 @@ async function processMessage({
   client,
   commandOrchestrator,
   commandParser,
-  errorHandler
+  errorHandler,
 }) {
   const { body, from, type, caption, chatId, id } = message;
   const regex = /(^!.*)|(mbot|bot|mimo-bot|mimo\s+bot)/i;
@@ -36,8 +36,8 @@ async function processMessage({
         context: message,
         client,
       });
-    } catch(error) {
-      if(errorHandler) {
+    } catch (error) {
+      if (errorHandler) {
         errorHandler(error, client, command, params);
       }
     } finally {

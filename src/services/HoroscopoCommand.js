@@ -7,7 +7,7 @@ class HoroscopoCommand extends Service {
     super();
     this.command = '!horoscopo';
     this.info = {
-      date: null,
+      title: null,
       data: null,
     };
     this.signs = [
@@ -30,24 +30,17 @@ class HoroscopoCommand extends Service {
   }
 
   async updateInfo() {
-    const today = moment().format('DDMMyyy');
+    const response = await getUrl('https://api.xor.cl/tyaas/');
 
-    if (this.info.date !== today) {
-      const response = await getUrl('https://api.adderou.cl/tyaas/', {
-        timeout: 1000,
-      });
-
-      if (response) {
-        this.info = {
-          date: today,
-          data: response.horoscopo,
-        };
-      }
+    if (response) {
+      this.info.title = `-=== Horóscopo ${response.titulo || ''} ===-`;
+      this.info.data = response.horoscopo;
     }
   }
 
-  formatMessage(data) {
+  formatMessage(data, title) {
     return [
+      `${title}`,
       `⚖️: ${data.nombre}`,
       `🗓️: ${data.fechaSigno}`,
       `💘: ${data.amor}`,
@@ -55,7 +48,7 @@ class HoroscopoCommand extends Service {
       `💰: ${data.dinero}`,
       `🎨: ${data.color}`,
       `🔢: ${data.numero}`,
-      '```creditos a Yolanda Sultana y a @eduardo```'
+      '```creditos a Yolanda Sultana y a @eduardo```',
     ].join('\n\r');
   }
 
@@ -68,10 +61,10 @@ class HoroscopoCommand extends Service {
 
     if (this.signs.indexOf(sign) > -1) {
       await this.updateInfo();
-      const { data: horoscopo } = this.info;
+      const { data: horoscopo, title } = this.info;
 
       if (horoscopo) {
-        msg = this.formatMessage(horoscopo[sign]);
+        msg = this.formatMessage(horoscopo[sign], title);
       } else {
         msg = 'Disculpame, no pude obtener el horóscopo.';
       }
