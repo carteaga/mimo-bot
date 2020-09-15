@@ -36,7 +36,7 @@ class PokemonCommand extends Service {
   async execute({ params, context, client }) {
     const { from } = context;
     let idPokemon = params[0] || '';
-    idPokemon = Number.isNaN(params[0])
+    idPokemon = Number(params[0])
       ? idPokemon.toLowerCase()
       : parseInt(idPokemon, 10);
     const request = `https://pokeapi.co/api/v2/pokemon/${idPokemon}`;
