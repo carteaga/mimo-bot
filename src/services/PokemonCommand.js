@@ -37,8 +37,8 @@ class PokemonCommand extends Service {
     const { from } = context;
     let idPokemon = params[0] || '';
     idPokemon = Number(params[0])
-      ? idPokemon.toLowerCase()
-      : parseInt(idPokemon, 10);
+      ? parseInt(idPokemon, 10)
+      : idPokemon.toLowerCase();
     const request = `https://pokeapi.co/api/v2/pokemon/${idPokemon}`;
     const response = await getUrl(request);
 
