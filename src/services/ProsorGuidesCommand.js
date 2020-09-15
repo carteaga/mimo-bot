@@ -15,6 +15,7 @@ class ProsorGuides extends Service {
     super();
     this.command = '!prosor';
     this.api = 'https://www.googleapis.com/youtube/v3';
+    this.help = 'Lista las últimas guías doteras de prosor. !prosor [nombre héroe]';
   }
 
   async getMessageStatisticsVideo(videoId) {

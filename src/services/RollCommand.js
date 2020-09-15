@@ -4,6 +4,7 @@ class RollCommand extends Service {
   constructor() {
     super();
     this.command = '!roll';
+    this.help = 'Lanza los dados. !roll [número máximo]';
   }
 
   async execute({ params, context, client }) {

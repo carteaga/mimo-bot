@@ -6,6 +6,7 @@ class PokemonCommand extends Service {
   constructor() {
     super();
     this.command = '!poke';
+    this.help = 'Invoca a tu pokémon favorito. !poke [#id pokémon] o !poke [nombre pokémon]';
   }
 
   async getImagePokemon(url) {

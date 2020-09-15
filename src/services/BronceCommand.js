@@ -5,6 +5,7 @@ class BronceCommand extends Service {
   constructor() {
     super();
     this.command = '!bronce';
+    this.help = 'Selecciona una frase para la posteriedad';
   }
 
   async execute({ context, client }) {

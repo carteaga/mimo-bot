@@ -4,6 +4,7 @@ class CaracolaCommand extends Service {
   constructor() {
     super();
     this.command = '!caracola';
+    this.help = 'Preguntale algo a la caracola mágica. ej: !caracola hoy tendré suerte?';
     this.respuestas = [
       'Maybe Someday',
       'Nada', // (dice esto cuando se le preguntó qué hacer)

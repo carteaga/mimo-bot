@@ -9,6 +9,7 @@ class ImageToSticker extends Service {
   constructor() {
     super();
     this.command = '!sticker';
+    this.help = 'Pasa una imagen a un sticker. envía una imagen con el texto !sticker. También funciona url !sticker [url]';
     this.types = ['image', 'chat'];
   }
 

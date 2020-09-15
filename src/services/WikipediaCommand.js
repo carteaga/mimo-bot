@@ -5,6 +5,8 @@ class WikipediaCommand extends Service {
   constructor() {
     super();
     this.command = '!wiki';
+    this.help = 'Búsca algo en wikipedia. !wiki [búsqueda]';
+    
   }
 
   async execute({ params, context, client }) {

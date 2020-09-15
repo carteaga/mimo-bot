@@ -7,6 +7,7 @@ class IsAliveCommand extends Service {
   constructor() {
     super();
     this.command = '!alive';
+    this.help = 'Quieres saber cuanto llevo con vida?';
     this.start = moment();
   }
 

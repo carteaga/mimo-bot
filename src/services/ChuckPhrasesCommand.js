@@ -5,6 +5,7 @@ class ChuckPhrasesCommand extends Service {
   constructor() {
     super();
     this.command = '!chuck';
+    this.help = 'Invocarás a chuck!';
   }
 
   async execute({ context, client }) {

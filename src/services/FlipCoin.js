@@ -4,6 +4,7 @@ class FlipCoin extends Service {
   constructor() {
     super();
     this.command = '!flipcoin';
+    this.help = 'Quieres que te ayude con una decisión. Lanza una moneda!';
   }
 
   async execute({ context, client }) {

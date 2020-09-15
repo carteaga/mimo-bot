@@ -6,6 +6,7 @@ class HoroscopoCommand extends Service {
   constructor() {
     super();
     this.command = '!horoscopo';
+    this.help = 'Horóscopo de la inigualable tía yoli. !horoscopo [tu signo]';
     this.info = {
       title: null,
       data: null,

@@ -6,6 +6,7 @@ class Covid19Command extends Service {
   constructor() {
     super();
     this.command = '!covid';
+    this.help = 'Información sobre covid 19. ej: !covid [país]';
   }
 
   cleanText(text) {

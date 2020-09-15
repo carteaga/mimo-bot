@@ -6,6 +6,7 @@ class MathExpressions extends Service {
   constructor() {
     super();
     this.command = '!math';
+    this.help = 'Resuelve un problema matematico. !math 1+1';
   }
 
   format(result) {

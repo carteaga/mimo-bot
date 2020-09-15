@@ -4,6 +4,7 @@ class BeerCommand extends Service {
   constructor() {
     super();
     this.command = '!beer';
+    this.help = 'Quieres una 🍺?';
     this.beerTypes = [
       'Ale',
       'Altbier',

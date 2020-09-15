@@ -8,6 +8,7 @@ class FeriadoCommand extends Service {
   constructor() {
     super();
     this.command = '!feriado';
+    this.help = 'Lista los feriados del año en chile. !feriado [número] o !feriado';
   }
 
   isHolidayValid(date) {

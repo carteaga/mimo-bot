@@ -4,6 +4,7 @@ class HelloCommand extends Service {
   constructor() {
     super();
     this.command = '!hello';
+    this.help = 'Saludame';
   }
 
   async execute({ params, context, client }) {
@@ -12,7 +13,7 @@ class HelloCommand extends Service {
       from,
     } = context;
     const name = params.length ? params.join(' ') : pushname;
-    await client.sendText(from, `🤖🖐 Hola ${name}`);
+    await client.sendText(from, `🖐🤖 Hola ${name}`);
   }
 }
 
