@@ -6,7 +6,7 @@ class RandomCat extends Service {
   constructor() {
     super();
     this.command = '!meow';
-    this.help = 'Quieres un gatito';
+    this.help = 'Quieres un gatito?';
   }
 
   async getImageCat(url) {
