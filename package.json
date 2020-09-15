@@ -21,20 +21,20 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@open-wa/wa-automate": "^2.0.13",
+    "@open-wa/wa-automate": "^2.0.22",
     "axios": "0.20.0",
     "cross-env": "7.0.2",
     "debug": "4.1.1",
     "dotenv": "8.2.0",
     "express": "4.17.1",
     "mathjs": "7.2.0",
-    "moment": "2.27.0",
+    "moment": "2.28.0",
     "numeral": "2.0.6",
     "p-queue": "6.6.1",
     "pretty-error": "2.1.1"
   },
   "devDependencies": {
-    "eslint": "7.8.1",
+    "eslint": "7.9.0",
     "eslint-config-airbnb-base": "14.2.0",
     "eslint-plugin-import": "2.22.0",
     "eslint-prettier-config": "1.0.1",
