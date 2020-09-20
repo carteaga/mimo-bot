@@ -9,15 +9,6 @@ class RandomCat extends Service {
     this.help = 'Quieres un gatito?';
   }
 
-  getExtensionImageToUrl(url) {
-    const validateImageUrl = /https?:[/|.|\w|\s|-]*\.((?:jpg|gif|png|jpge|webp))/;
-    const match = url.match(validateImageUrl);
-    if (match && match.length === 2) {
-      return match[1];
-    }
-    return '';
-  }
-
   async getImageCat(url) {
     const img = await getUrl(url, { responseType: 'arraybuffer' });
 
