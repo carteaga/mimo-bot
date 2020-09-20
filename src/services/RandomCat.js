@@ -20,7 +20,7 @@ class RandomCat extends Service {
 
   async execute({ context, client, params }) {
     const { from } = context;
-    const uri = 'https://cataas.com/c?t=sm';
+    const uri = 'https://cataas.com/c?wi=100';
     const img = await this.getImageCat(uri);
 
     img
