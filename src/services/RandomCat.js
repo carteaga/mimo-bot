@@ -28,7 +28,7 @@ class RandomCat extends Service {
     do {
       url = await getUrl('https://aws.random.cat/meow');
       ext = url ? this.getExtensionImageToUrl(url.file) : null;
-      count  += 1;
+      count += 1;
     } while (ext === 'gif' && count <= MAX_TRY);
 
     if (!url) return null;
@@ -45,15 +45,17 @@ class RandomCat extends Service {
     const { from } = context;
     const img = await this.getImageCat();
 
-    if (!img) {
-      await client.sendText(
-        from,
-        'lo siento, pero se agotaron los gatos. Esperemos unos minutos.'
-      );
-      return;
-    }
-
-    await client.sendImage(from, img, 'gatito.jpg', 'un gatito para tu vida');
+    img
+      ? await client.sendImage(
+          from,
+          img,
+          'gatito.jpg',
+          'un gatito para tu vida'
+        )
+      : await client.sendText(
+          from,
+          'lo siento, pero se agotaron los gatos. Esperemos unos minutos.'
+        );
   }
 }
 
