@@ -18,38 +18,25 @@ class RandomCat extends Service {
     return '';
   }
 
-  async getImageCat() {
-    const MAX_TRY = 3;
-
-    let url = null;
-    let ext = null;
-    let count = 3;
-
-    do {
-      url = await getUrl('https://aws.random.cat/meow');
-      ext = url ? this.getExtensionImageToUrl(url.file) : null;
-      count += 1;
-    } while (ext === 'gif' && count <= MAX_TRY);
-
-    if (!url) return null;
-
-    const img = await getUrl(url.file, { responseType: 'arraybuffer' });
+  async getImageCat(url) {
+    const img = await getUrl(url, { responseType: 'arraybuffer' });
 
     if (!img) return null;
 
     const imageBinary = Buffer.from(img, 'binary').toString('base64');
-    return `data:image/${ext};base64,${imageBinary}`;
+    return `data:image/jpeg;base64,${imageBinary}`;
   }
 
-  async execute({ context, client }) {
+  async execute({ context, client, params }) {
     const { from } = context;
-    const img = await this.getImageCat();
+    const uri = 'https://cataas.com/c?t=sm';
+    const img = await this.getImageCat(uri);
 
     img
       ? await client.sendImage(
           from,
           img,
-          'gatito.jpg',
+          'gatito.jpeg',
           'un gatito para tu vida'
         )
       : await client.sendText(
