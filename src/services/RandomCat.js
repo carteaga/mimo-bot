@@ -9,38 +9,50 @@ class RandomCat extends Service {
     this.help = 'Quieres un gatito?';
   }
 
-  async getImageCat(url) {
-    const img = await getUrl(url, { responseType: 'arraybuffer' });
-    if (img) {
-      return `data:image/jpg;base64,${Buffer.from(img, 'binary').toString(
-        'base64'
-      )}`;
+  getExtensionImageToUrl(url) {
+    const validateImageUrl = /https?:[/|.|\w|\s|-]*\.((?:jpg|gif|png|jpge|webp))/;
+    const match = url.match(validateImageUrl);
+    if (match && match.length === 2) {
+      return match[1];
     }
-    return undefined;
+    return '';
+  }
+
+  async getImageCat() {
+    const MAX_TRY = 3;
+
+    let url = null;
+    let ext = null;
+    let count = 3;
+
+    do {
+      url = await getUrl('https://aws.random.cat/meow');
+      ext = url ? this.getExtensionImageToUrl(url.file) : null;
+      count  += 1;
+    } while (ext === 'gif' && count <= MAX_TRY);
+
+    if (!url) return null;
+
+    const img = await getUrl(url.file, { responseType: 'arraybuffer' });
+
+    if (!img) return null;
+
+    const imageBinary = Buffer.from(img, 'binary').toString('base64');
+    return `data:image/${ext};base64,${imageBinary}`;
   }
 
   async execute({ context, client }) {
     const { from } = context;
-
-    const { file } = await getUrl('https://aws.random.cat/meow');
-
-    if (!file) {
-      await client.sendText(
-        from,
-        `${pushname} lo siento, pero no encontre ningún gato :c`
-      );
-      return;
-    }
-
-    const img = await this.getImageCat(file);
+    const img = await this.getImageCat();
 
     if (!img) {
       await client.sendText(
         from,
-        `${pushname} lo siento, pero no encontre ningún gato :c`
+        'lo siento, pero se agotaron los gatos. Esperemos unos minutos.'
       );
       return;
     }
+
     await client.sendImage(from, img, 'gatito.jpg', 'un gatito para tu vida');
   }
 }
