@@ -20,7 +20,8 @@ const configBot = {
   cacheEnabled: false,
   devtools: config.dev,
   blockCrashLogs: true,
-  bypassCSP: true
+  bypassCSP: true,
+  cacheEnabled: true
 }
 
 module.exports = {
