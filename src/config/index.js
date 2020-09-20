@@ -17,7 +17,6 @@ const configBot = {
   autoRefresh: true,
   qrRefreshS: 15,
   killTimer: 40,
-  cacheEnabled: false,
   devtools: config.dev,
   blockCrashLogs: true,
   bypassCSP: true,
