@@ -19,7 +19,8 @@ const configBot = {
   killTimer: 40,
   cacheEnabled: false,
   devtools: config.dev,
-  blockCrashLogs: true
+  blockCrashLogs: true,
+  bypassCSP: true
 }
 
 module.exports = {
