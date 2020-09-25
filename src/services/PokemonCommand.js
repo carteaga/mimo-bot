@@ -6,21 +6,32 @@ class PokemonCommand extends Service {
   constructor() {
     super();
     this.command = '!poke';
-    this.help = 'Invoca a tu pokémon favorito. !poke [#id pokémon] o !poke [nombre pokémon]';
+    this.help =
+      'Invoca a tu pokémon favorito. !poke [#id pokémon] o !poke [nombre pokémon]';
   }
 
   async getImagePokemon(url) {
+    if (!url) return null;
+
     const img = await getUrl(url, { responseType: 'arraybuffer' });
     if (img) {
       return `data:image/png;base64,${Buffer.from(img, 'binary').toString(
         'base64'
       )}`;
     }
-    return undefined;
+    return null;
   }
 
   formatResponsePokemon(data) {
-    const { weight, types, height, name, abilities, id } = data;
+    const {
+      weight = 0,
+      types = [],
+      height = 0,
+      name,
+      abilities = [],
+      id,
+    } = data;
+
     const abilitiesPokemon = abilities
       .map((info) => info.ability.name)
       .join(', ');
@@ -29,7 +40,7 @@ class PokemonCommand extends Service {
     return [
       `#${id} *${name}* | Tipo(s): ${typesPokemon}`,
       `Pesa: ${weight / 10}kg | Mide: ${height / 10}m`,
-      `Habilidades: ${abilitiesPokemon}`,
+      `Habilidades: ${abilitiesPokemon || 'no registrado.'}`,
     ].join('\n');
   }
 
@@ -39,31 +50,33 @@ class PokemonCommand extends Service {
     idPokemon = Number(params[0])
       ? parseInt(idPokemon, 10)
       : idPokemon.toLowerCase();
+
+    if (!idPokemon != '') {
+      client.sendText(from, 'porfavor dime qué pokémon elegir.');
+      return;
+    }
+
     const request = `https://pokeapi.co/api/v2/pokemon/${idPokemon}`;
     const response = await getUrl(request);
 
-    if (!idPokemon && response) {
-      const { count } = response;
-      await client.sendText(from, `Hay ${count} pokémon`);
-    } else if (response) {
-      const {
-        sprites: { front_default: frontDefault },
-      } = response;
-
-      const img = await this.getImagePokemon(frontDefault);
-      const textFormated = this.formatResponsePokemon(response);
-
-      if (img !== '') {
-        await client.sendImage(from, img, 'img.png', textFormated);
-      } else {
-        await client.sendText(from, textFormated);
-      }
-    } else {
+    if (!response) {
       await client.sendText(
         from,
         `Lo siento, el pokémon ${idPokemon} no fue encontrado 😧`
       );
+      return;
     }
+
+    const {
+      sprites: { front_default: frontDefault },
+    } = response;
+
+    const img = await this.getImagePokemon(frontDefault);
+    const textFormated = this.formatResponsePokemon(response);
+
+    img
+      ? await client.sendImage(from, img, 'img.png', textFormated)
+      : await client.sendText(from, textFormated);
   }
 }
 
