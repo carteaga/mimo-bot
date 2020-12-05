@@ -31,7 +31,7 @@ Bot cuenta con funcionalidad adicional, para activar esto, se deben configurar l
 El bot envia el mensaje "estoy vivo" a un número determinado cada cierto X tiempo configurado en el variable TIME_PING.
 
 - PHONE_PING: Número de telefono que recive el ping, el formato debe ser **[Código de país][número de telefono]@c** ejemplo: '56988888888@c.us'
-- TIME_PING: Intervalo de tiempo para enviar el mensaje.
+- TIME_PING: Intervalo de tiempo en milisegundos para enviar el mensaje.
 
 ### Reconoce la intención de un mensaje
 
