@@ -35,7 +35,7 @@ El bot envia el mensaje "estoy vivo" a un número determinado cada cierto X tiem
 
 ### Reconoce la intención de un mensaje
 
-El bot puede conectarse a [Luis](https://www.luis.ai/) para interpretar comandos puedes decir hola bot y el entenderá el comando !hello
+El bot puede conectarse a [Luis](https://www.luis.ai/) para interpretar comandos, por ejemplo, puedes decir hola bot y el bot interpretará el mensaje como el comando bot
 
 - LUIS_KEY: llave privada de Luis
 - LUIS_APP_ID: Id de la aplicación
