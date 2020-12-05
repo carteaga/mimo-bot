@@ -1,6 +1,6 @@
 # Mimo-Bot
 
-Es un bot para whatsapp que responde a través de comandos como por ejemplo !hello. El bot se ejecuta a través de whatsapp web para leer y responder los comandos, esto con ayuda de [wa-automate-nodejs](https://github.com/open-wa/wa-automate-nodejs)
+Es un bot para whatsapp que responde a través de comandos como por ejemplo !hello. El bot se ejecuta a través de whatsapp web para leer y responder los comandos, esto con ayuda de [wa-automate-nodejs](https://github.com/open-wa/wa-automate-nodejs).
 
 ## Pre-requisitos
 
