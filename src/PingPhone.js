@@ -1,18 +1,21 @@
 const debug = require('debug')('app:server');
 
-function pingPhone(client, phone, seconds) {
-  if (phone) {
-    setInterval(async () => {
-      debug('enviando mensaje :)');
-      try {
-        await client.sendText(phone, `Enviando señales de vida`);
-      } catch (err) {
-        debug('hubo un error ', err);
-      }
-    }, seconds);
-  } else {
-    debug('no hay telefono configurado');
+async function sendPingMessage(client, phone) {
+  debug('enviando mensaje :)');
+  try {
+    await client.sendText(phone, 'Enviando señales de vida');
+  } catch (err) {
+    debug('hubo un error ', err);
   }
+}
+
+function pingPhone(client, phone, seconds) {
+  if (!phone) {
+    debug('no hay telefono configurado');
+    return;
+  }
+
+  setInterval(async () => sendPingMessage(client, phone), seconds);
 }
 
 module.exports = pingPhone;

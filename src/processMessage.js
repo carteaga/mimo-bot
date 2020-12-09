@@ -11,40 +11,39 @@ async function processMessage({
   errorHandler,
 }) {
   const { body, from, type, caption, chatId, id } = message;
-  const regex = /(^!.*)|(mbot|bot|mimo-bot|mimo\s+bot)/i;
-  const commandRegex = /^!.*/;
   const rawMessage = type !== 'chat' ? caption : body;
+  const isMessageForBot = regex.test(/(^!.*)|(mbot|bot|mimo-bot|mimo\s+bot)/i);
 
-  if (regex.test(rawMessage)) {
-    let messageProcessed = rawMessage;
+  if (!isMessageForBot) return;
 
-    if (!commandRegex.test(rawMessage)) {
-      messageProcessed = await luisParser.parser(rawMessage);
+  const isPureCommandForBot = commandRegex.test(/^!.*/);
+  const messageProcessed = isPureCommandForBot
+    ? rawMessage
+    : await luisParser.parser(rawMessage);
+
+  const { command, params } = commandParser.parser(messageProcessed);
+
+  debug(
+    `- ${from} envia: ${rawMessage} (${type}) = commando "${command}", parametros [${params}]`
+  );
+
+  try {
+    await client.simulateTyping(from, true);
+    await commandOrchestrator.execute({
+      command,
+      params,
+      type,
+      context: message,
+      client,
+    });
+  } catch (error) {
+    if (errorHandler) {
+      errorHandler(error, client, command, params);
     }
-
-    const { command, params } = commandParser.parser(messageProcessed);
-    debug(
-      `- ${from} envia: ${rawMessage} (${type}) = commando "${command}", parametros [${params}]`
-    );
-
-    try {
-      await client.simulateTyping(message.from, true);
-      await commandOrchestrator.execute({
-        command,
-        params,
-        type,
-        context: message,
-        client,
-      });
-    } catch (error) {
-      if (errorHandler) {
-        errorHandler(error, client, command, params);
-      }
-    } finally {
-      await client.simulateTyping(message.from, false);
-      await client.sendSeen(chatId);
-      await client.deleteMessage(from, id, false);
-    }
+  } finally {
+    await client.simulateTyping(from, false);
+    await client.sendSeen(chatId);
+    await client.deleteMessage(from, id, false);
   }
 }
 
