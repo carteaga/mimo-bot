@@ -12,7 +12,8 @@ class RandomContact extends Service {
     const { from, isGroupMsg, chatId } = context;
 
     if (!isGroupMsg) {
-      client.sendText(from, 'pssss estamos solos los dos.');
+      await client.sendText(from, 'pssss estamos solos los dos.');
+      return;
     }
 
     const members = await client.getGroupMembers(chatId);
