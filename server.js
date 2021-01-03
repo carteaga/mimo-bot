@@ -11,13 +11,8 @@ sulla
     ...configBot,
     restartOnCrash: startBot,
   })
-  .then(async (client) => {
-    await startBot(client);
-  })
-  .catch((e) => {
-    // eslint-disable-next-line no-console
-    console.log('error', e);
-  });
+  .then((client) => startBot(client))
+  .catch((e) => console.log('error', e));
 
 app.get('/', async (req, res) => {
   return res.sendFile('./index.html', { root: __dirname });
