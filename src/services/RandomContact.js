@@ -1,7 +1,7 @@
 const phrases = require('../utils/phrases');
 const Service = require('../Service');
 
-const MESSAGE_TWO_CONTACT = 'pssss estamos solos los dos';
+const MESSAGE_TWO_CONTACT = 'pssss ya sabes quién será el elegido';
 
 class RandomContact extends Service {
   constructor() {
