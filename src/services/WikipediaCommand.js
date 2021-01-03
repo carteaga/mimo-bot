@@ -11,12 +11,13 @@ class WikipediaCommand extends Service {
   }
 
   async execute({ params, context, client }) {
+    const { from } = context;
+
     if (!params.length) {
       await client.sendText(from, MESSAGE_NOT_FOUND);
       return;
     }
 
-    const { from } = context;
     const search = params.join(' ').trim();
     const response = await getUrl(
       `https://es.wikipedia.org/w/api.php?action=opensearch&search=${search}&limit=10&format=json`
