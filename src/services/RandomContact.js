@@ -1,6 +1,8 @@
 const phrases = require('../utils/phrases');
 const Service = require('../Service');
 
+const MESSAGE_TWO_CONTACT = 'pssss estamos solos los dos';
+
 class RandomContact extends Service {
   constructor() {
     super();
@@ -12,11 +14,17 @@ class RandomContact extends Service {
     const { from, isGroupMsg, chatId } = context;
 
     if (!isGroupMsg) {
-      await client.sendText(from, 'pssss estamos solos los dos.');
+      await client.sendText(from, MESSAGE_TWO_CONTACT);
       return;
     }
 
     const members = await client.getGroupMembers(chatId);
+
+    if (members.length === 2) {
+      await client.sendText(from, MESSAGE_TWO_CONTACT);
+      return;
+    }
+
     const membersWithoutMe = members.filter((member) => !member.isMe);
     const memberElected =
       membersWithoutMe[Math.floor(Math.random() * membersWithoutMe.length)];
