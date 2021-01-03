@@ -3,7 +3,7 @@ const Service = require('../Service');
 class Help extends Service {
   constructor() {
     super();
-    this.command = '!help';
+    this.command = ['!help', '!h'];
     this.help = 'Lista todos los comandos';
   }
 
