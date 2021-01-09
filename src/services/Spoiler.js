@@ -9,7 +9,7 @@ class Spoiler extends Service {
 
   async execute({ params, client, context }) {
     const { from } = context;
-    const message = params.join('');
+    const message = params.join(' ');
     const title = '[SPOILER]';
     const separator = '\r\n'.repeat(3);
     const padding = '\u200B'.repeat(4000);
