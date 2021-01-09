@@ -21,7 +21,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@open-wa/wa-automate": "3.1.12",
+    "@open-wa/wa-automate": "2.0.25",
     "axios": "0.21.1",
     "cross-env": "7.0.3",
     "debug": "4.3.1",
