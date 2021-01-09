@@ -4,7 +4,7 @@ class Spoiler extends Service {
   constructor() {
     super();
     this.command = '!spoiler';
-    this.help = 'Genera un spoiler de un text (functiona solo en android)';
+    this.help = 'Genera un spoiler de un text (funciona solo en android)';
   }
 
   async execute({ params, client, context }) {
