@@ -29,11 +29,7 @@ class RandomContact extends Service {
       membersWithoutMe[Math.floor(Math.random() * membersWithoutMe.length)];
     const phoneNumber = memberElected.id.split('@')[0] || 'error';
 
-    await client.sendReplyWithMentions(
-      from,
-      `El elegido es: @${phoneNumber}`,
-      id
-    );
+    await client.sendTextWithMentions(from, `El elegido es: @${phoneNumber}`);
   }
 }
 
