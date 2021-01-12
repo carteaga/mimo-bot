@@ -1,4 +1,3 @@
-const phrases = require('../utils/phrases');
 const Service = require('../Service');
 
 const MESSAGE_TWO_CONTACT = 'pssss ya sabes quién será el elegido';
@@ -11,7 +10,7 @@ class RandomContact extends Service {
   }
 
   async execute({ context, client }) {
-    const { from, isGroupMsg, chatId } = context;
+    const { from, isGroupMsg, chatId, id } = context;
 
     if (!isGroupMsg) {
       await client.sendText(from, MESSAGE_TWO_CONTACT);
@@ -30,7 +29,11 @@ class RandomContact extends Service {
       membersWithoutMe[Math.floor(Math.random() * membersWithoutMe.length)];
     const phoneNumber = memberElected.id.split('@')[0] || 'error';
 
-    await client.sendTextWithMentions(from, `El elegido es: @${phoneNumber}`);
+    await client.sendReplyWithMentions(
+      from,
+      `El elegido es: @${phoneNumber}`,
+      id
+    );
   }
 }
 
