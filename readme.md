@@ -6,7 +6,7 @@ Es un bot para whatsapp que responde a través de comandos como por ejemplo !hel
 
 - Tener instalado [nodejs](https://nodejs.org/es/) 
 
-- Un celular con un número disponible para whatsapp,  esto es porque dado que el bot iniciará sesión con whatsapp-web para leer mensajes. Durante el tiempo que el bot se encuentre activo, el movil debe disponer con una conexión a internet. Puedes utilizar tu celular para hacer una prueba, después solo basta con quitar el permiso de acceso a whatsapp web para detener el bot.
+- Un celular con un número disponible para whatsapp,  esto es porque que el bot iniciará sesión con whatsapp-web para leer mensajes. Durante el tiempo que el bot se encuentre activo, el movil debe disponer con una conexión a internet. Puedes utilizar tu celular para hacer una prueba, después solo basta con quitar el permiso de acceso a whatsapp web para detener el bot.
 
 ## Instalación
 
