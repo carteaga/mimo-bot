@@ -15,7 +15,7 @@ class TransantiagoCommand extends Service {
 
     if (busStop !== '') {
       const response = await getUrl(
-        `https://api.adderou.cl/ts/?paradero=${busStop}`
+        `https://api.xor.cl/ts/?paradero=${busStop}`
       );
       if (response) {
         const { id, servicios, descripcion } = response;
