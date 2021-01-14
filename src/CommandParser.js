@@ -1,4 +1,4 @@
-const REGEX_COMMAND = /^!\s*([a-zA-ZÀ-ÿ\u00f1\u00d1]+)\s+(.*)$/;
+const REGEX_COMMAND = /^!\s*([a-zA-ZÀ-ÿ\u00f1\u00d1]+)\s*(.*)$/;
 
 class CommandParser {
   cleanText(text) {
