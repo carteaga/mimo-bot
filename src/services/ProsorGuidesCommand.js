@@ -112,7 +112,8 @@ class ProsorGuides extends Service {
   }
 
   getSearchLink(searchText) {
-    return `https://www.youtube.com/channel/${this.prosorYoutubeChannelId}/search?query=${searchText}`;
+    const searchTextEncoded = encodeURIComponent(searchText);
+    return `https://www.youtube.com/channel/${this.prosorYoutubeChannelId}/search?query=${searchTextEncoded}`;
   }
 
   async execute({ params, context, client }) {
