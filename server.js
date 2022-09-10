@@ -7,7 +7,7 @@ const startBot = require('./src/startBot');
 const app = express();
 
 sulla
-  .create('session', {
+  .create({
     ...configBot,
     restartOnCrash: startBot,
   })
