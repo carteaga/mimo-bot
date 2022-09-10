@@ -12,8 +12,8 @@
     "eslint": "eslint ./src"
   },
   "engines": {
-    "node": "16.13.1",
-    "npm": "8.14.0"
+    "node": "v18.9.0",
+    "npm": "8.19.1"
   },
   "keywords": [
     "heroku"
@@ -26,7 +26,6 @@
     "cross-env": "7.0.3",
     "debug": "4.3.4",
     "dotenv": "16.0.2",
-    "express": "4.18.1",
     "mathjs": "11.1.0",
     "moment": "2.29.4",
     "numeral": "2.0.6",
