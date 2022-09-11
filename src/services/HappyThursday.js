@@ -10,7 +10,7 @@ class HappyThursday extends Service {
     this.help = 'Feliz jueves!';
   }
 
-  async execute({ context, client, params }) {
+  async execute({ context, client }) {
     const { from } = context;
 
     await client.sendGiphyAsSticker(from, HAPPY_THUESDAY_GIF);
