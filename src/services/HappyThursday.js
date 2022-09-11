@@ -1,8 +1,6 @@
 const Service = require('../Service');
-
-const HAPPY_THUESDAY_GIF =
-  'https://media.giphy.com/media/5nS2CCNuGyg5w3Eevt/giphy.gif';
-
+const { happyThursday } = require('../config');
+const { gif } = happyThursday;
 class HappyThursday extends Service {
   constructor() {
     super();
@@ -10,10 +8,10 @@ class HappyThursday extends Service {
     this.help = 'Feliz jueves!';
   }
 
-  async execute({ context, client }) {
+  execute({ context, client }) {
     const { from } = context;
 
-    await client.sendGiphyAsSticker(from, HAPPY_THUESDAY_GIF);
+    return client.sendGiphyAsSticker(from, gif);
   }
 }
 
