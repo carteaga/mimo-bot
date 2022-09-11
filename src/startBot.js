@@ -1,9 +1,8 @@
 const commandOrchestrator = require('./InitCommand');
 const CommandParser = require('./CommandParser');
-const pingPhone = require('./PingPhone');
-const { config } = require('./config/index');
 const processMessage = require('./processMessage');
 const errorHandler = require('./errorHandler');
+const loadPlugins = require('./loadPlugins');
 
 function start(client) {
   const commandParser = new CommandParser();
@@ -12,8 +11,6 @@ function start(client) {
     console.log('statechanged', state);
     if (state === 'CONFLICT') client.forceRefocus();
   });
-
-  pingPhone(client, config.phonePing, config.timePing);
 
   client.onMessage((message) =>
     processMessage({
@@ -24,6 +21,8 @@ function start(client) {
       errorHandler,
     })
   );
+
+  loadPlugins({ client });
 }
 
 module.exports = start;

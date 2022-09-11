@@ -1,3 +1,4 @@
+const { config } = require('../config/');
 const debug = require('debug')('app:server');
 
 async function sendPingMessage(client, phone) {
@@ -9,8 +10,8 @@ async function sendPingMessage(client, phone) {
   }
 }
 
-function pingPhone(client, phone, seconds) {
-  if (!phone) {
+function pingPhone({ client }) {
+  if (!config.phone && !config.seconds) {
     debug('no hay telefono configurado');
     return;
   }

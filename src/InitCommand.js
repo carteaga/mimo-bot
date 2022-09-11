@@ -1,8 +1,7 @@
-const fs = require('fs');
 const debug = require('debug')('app:server');
-const normalizedPath = require('path').join(__dirname, 'services');
 const CommandOrquester = require('./CommandOrquester');
 const { config } = require('./config');
+const getFilesInFolder = require('./utils/getFilesInFolder');
 
 const { excludeCommands } = config;
 
@@ -10,11 +9,7 @@ const upperCommandsName = excludeCommands.map((command) =>
   command.toUpperCase()
 );
 
-const allCommandFiles = fs.readdirSync(normalizedPath).map((file) => {
-  const [name] = file.split('.');
-  return { file, name };
-});
-
+const allCommandFiles = getFilesInFolder('services');
 const activeCommandFile = allCommandFiles.filter(
   ({ name }) => !upperCommandsName.includes(name.toUpperCase())
 );
