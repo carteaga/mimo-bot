@@ -1,7 +1,8 @@
-const querystring = require('querystring');
 const numeral = require('numeral');
 const moment = require('moment');
 const { getUrl } = require('../utils/getUrl');
+const spoilerMessages = require('../utils/spoilerMessage');
+
 const Service = require('../Service');
 
 moment.locale('es');
@@ -23,11 +24,11 @@ class ProsorGuides extends Service {
   }
 
   async getMessageStatisticsVideo({ videoId }) {
-    const query = querystring.stringify({
+    const query = new URLSearchParams({
       key: youtubeKey,
       part: 'statistics',
       id: videoId,
-    });
+    }).toString();
     const responseStatistics = await getUrl(`${this.api}/videos?${query}`);
 
     if (responseStatistics && responseStatistics.items.length) {
@@ -61,14 +62,14 @@ class ProsorGuides extends Service {
   }
 
   async getVideos(searchText) {
-    const query = querystring.stringify({
+    const query = new URLSearchParams({
       part: 'snippet',
       channelId: this.prosorYoutubeChannelId,
       order: 'date',
       q: searchText,
       key: youtubeKey,
       maxResults: 10,
-    });
+    }).toString();
 
     const searchResource = `${this.api}/search?${query}`;
     const { items = [] } = await getUrl(searchResource);
@@ -147,9 +148,7 @@ class ProsorGuides extends Service {
     );
 
     const message = mergedInfoVideosStatistics.map(this.formatMessage);
-    message.unshift(
-      `Resultados ${searchText} ${String.fromCharCode('0x200B').repeat(2575)}`
-    );
+    message.unshift(spoilerMessages(`Resultados ${searchText}`));
     message.push(`para más 👇👇👇\n${this.getSearchLink(searchText)}`);
 
     await client.sendText(from, message.join('\n\n'));

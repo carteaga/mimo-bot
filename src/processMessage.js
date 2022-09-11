@@ -1,6 +1,6 @@
 const debug = require('debug')('app:server');
 
-const REGEX_MESSAGE_FOR_BOT = /(^!.*)|(mbot|bot|mimo-bot|mimo\s+bot)/i;
+const REGEX_MESSAGE_FOR_BOT = /(^!.*)/i;
 
 async function processMessage({
   message,
@@ -9,7 +9,7 @@ async function processMessage({
   commandParser,
   errorHandler,
 }) {
-  const { body, from, type, caption, chatId, id } = message;
+  const { body, from, type, caption, chatId } = message;
   const rawMessage = type !== 'chat' ? caption : body;
   const isMessageForBot = REGEX_MESSAGE_FOR_BOT.test(rawMessage);
 
