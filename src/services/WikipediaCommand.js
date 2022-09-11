@@ -18,7 +18,7 @@ class WikipediaCommand extends Service {
       return;
     }
 
-    const search = encodeUriComponent(params.join(' ').trim());
+    const search = encodeURI(params.join(' ').trim());
     const response = await getUrl(
       `https://es.wikipedia.org/w/api.php?action=opensearch&search=${search}&limit=10&format=json`
     );
