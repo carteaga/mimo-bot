@@ -10,6 +10,7 @@ const config = {
   luisEndPoint: process.env.LUIS_ENDPOINT,
   luisAppId: process.env.LUIS_APP_ID,
   youtubeKey: process.env.YOUTUBE_KEY,
+  excludeCommands: process.env.EXCLUDE_COMMANDS?.split(',') || [],
 };
 
 const configBot = {

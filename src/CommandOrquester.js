@@ -3,13 +3,13 @@ class CommandOrchestrator {
     this.commands = [];
   }
 
-  addCommand(command) {
-    this.commands.push(command);
+  addCommand(...commands) {
+    this.commands.push(...commands);
   }
 
   execute(config) {
     const matches = this.commands.filter((cmd) => cmd.match(config));
-    
+
     return Promise.all(
       matches.map((cmd) =>
         cmd.execute({
