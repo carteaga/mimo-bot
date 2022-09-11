@@ -1,10 +1,6 @@
 const debug = require('debug')('app:server');
-const { raw } = require('express');
-const LuisParser = require('./LuisParsers');
 
-const luisParser = new LuisParser();
 const REGEX_MESSAGE_FOR_BOT = /(^!.*)|(mbot|bot|mimo-bot|mimo\s+bot)/i;
-const REGEX_IS_PURE_COMMAND = /^!.*/;
 
 async function processMessage({
   message,
@@ -19,17 +15,9 @@ async function processMessage({
 
   await client.sendSeen(chatId);
 
-  if (!isMessageForBot) {
-    client.deleteMessage(from, id);
-    return;
-  }
+  if (!isMessageForBot) return;
 
-  const isPureCommandForBot = REGEX_IS_PURE_COMMAND.test(rawMessage);
-  const messageProcessed = isPureCommandForBot
-    ? rawMessage
-    : await luisParser.parser(rawMessage);
-
-  const { command, params } = commandParser.parser(messageProcessed);
+  const { command, params } = commandParser.parser(rawMessage);
 
   debug(
     `- ${from} envia: ${rawMessage} (${type}) = commando "${command}", parametros [${params}]`
@@ -50,7 +38,6 @@ async function processMessage({
     }
   } finally {
     await client.simulateTyping(from, false);
-    await client.deleteMessage(from, id);
   }
 }
 

@@ -33,14 +33,6 @@ El bot envia el mensaje "estoy vivo" a un número determinado cada cierto X tiem
 - PHONE_PING: Número de telefono que recive el ping, el formato debe ser **[Código de país][número de telefono]@c** ejemplo: '56988888888@c.us'
 - TIME_PING: Intervalo de tiempo en milisegundos para enviar el mensaje.
 
-### Reconoce la intención de un mensaje
-
-El bot puede conectarse a [Luis](https://www.luis.ai/) para interpretar comandos, por ejemplo, puedes decir hola bot y el bot interpretará el mensaje como el comando bot
-
-- LUIS_KEY: llave privada de Luis
-- LUIS_APP_ID: Id de la aplicación
-- LUIS_ENDPOINT: url endpoint de Luis
-
 ### Otros 
 - YOUTUBE_KEY=Llave para conectarse a la api de youtube, el comando !prosor ocupa este valor.
 - PORT: puerto para levantar página web de bot (por defecto 3000)
