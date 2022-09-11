@@ -9,7 +9,9 @@ class Help extends Service {
 
   async execute({ client, commands, context }) {
     const { from } = context;
-    const title = '🚀 Comandos mimo-bot 🚀';
+    const title = `🚀 Comandos mimo-bot 🚀 ${String.fromCharCode(
+      '0x200B'
+    ).repeat(2575)}`;
     const helpTexts = commands.map(
       ({ command, help }) => `· *${command}*: ${help}`
     );
