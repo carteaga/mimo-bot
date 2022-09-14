@@ -13,7 +13,7 @@ class UselessFact extends Service {
     const { text } = await getUrl(
       'https://uselessfacts.jsph.pl//random.json?language=en'
     );
-ß
+
     text && client.sendText(from, text);
   }
 }
