@@ -1,7 +1,6 @@
 require('dotenv').config();
 
 const config = {
-  sessionId: 'session',
   dev: process.env.NODE_ENV !== 'production',
   port: process.env.PORT || 8080,
   phonePing: process.env.PHONE_PING,
@@ -15,12 +14,8 @@ const config = {
 };
 
 const configBot = {
-  throwErrorOnTosBlock: true,
-  autoRefresh: true,
-  qrRefreshS: 15,
-  killTimer: 40,
-  blockCrashLogs: true,
-  cacheEnabled: false,
+  sessionId: 'session',
+  qrTimeout: 0,
 };
 
 const happyThursday = {
