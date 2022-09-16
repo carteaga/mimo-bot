@@ -12,7 +12,7 @@ const scheduleSendGif = ({ users, schedule, timezone, gif, client }) => {
 
   if (!gif) return;
 
-  cron.schedule(schedule, () => sendMessagesAllGroups(client), {
+  cron.schedule(schedule, () => sendMessagesAllGroups({ client, users, gif }), {
     timezone,
   });
 };
