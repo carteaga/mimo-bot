@@ -26,7 +26,7 @@ class UselessFact extends Service {
     const { from } = context;
     const [numberFact] = params;
 
-    if (!isNumber(numberFact) && Number(numberFact) <= 0) {
+    if (!isNumber(numberFact) || Number(numberFact) <= 0) {
       this.sendFact(client, from);
       return;
     }
