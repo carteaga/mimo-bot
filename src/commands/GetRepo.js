@@ -1,4 +1,4 @@
-const Service = require('../Service');
+const Service = require('../core/Service');
 
 const REPO_BOT = 'https://github.com/carteaga/mimo-bot';
 

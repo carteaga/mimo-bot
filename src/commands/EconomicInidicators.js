@@ -1,4 +1,4 @@
-const Service = require('../Service');
+const Service = require('../core/Service');
 const { getUrl } = require('../utils/getUrl');
 const moment = require('moment');
 

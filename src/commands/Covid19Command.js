@@ -1,6 +1,6 @@
 const { getUrl } = require('../utils/getUrl');
 const formatNumber = require('../utils/formatNumber');
-const Service = require('../Service');
+const Service = require('../core/Service');
 
 class Covid19Command extends Service {
   constructor() {

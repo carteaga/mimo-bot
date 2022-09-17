@@ -1,11 +1,12 @@
-const Service = require('../Service');
+const Service = require('../core/Service');
 const { getUrl } = require('../utils/getUrl');
 
 class TransantiagoCommand extends Service {
   constructor() {
     super();
     this.command = '!tran';
-    this.help = 'Revisa el horario de los buses según su paradero. !tran [código paradero]';
+    this.help =
+      'Revisa el horario de los buses según su paradero. !tran [código paradero]';
   }
 
   async execute({ params, context, client }) {

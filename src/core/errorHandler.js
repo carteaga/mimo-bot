@@ -1,5 +1,5 @@
 const PrettyError = require('pretty-error');
-const { config } = require('./config/index');
+const { config } = require('../config/index');
 
 const pe = new PrettyError();
 

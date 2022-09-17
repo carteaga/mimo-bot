@@ -1,5 +1,5 @@
 const moment = require('moment');
-const Service = require('../Service');
+const Service = require('../core/Service');
 const { getUrl } = require('../utils/getUrl');
 
 moment.locale('es');
@@ -8,7 +8,8 @@ class FeriadoCommand extends Service {
   constructor() {
     super();
     this.command = '!feriado';
-    this.help = 'Lista los feriados del año en chile. !feriado [número] o !feriado';
+    this.help =
+      'Lista los feriados del año en chile. !feriado [número] o !feriado';
   }
 
   isHolidayValid(date) {

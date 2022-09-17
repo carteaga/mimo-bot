@@ -1,4 +1,4 @@
-const Service = require('../Service');
+const Service = require('../core/Service');
 
 class CaracolaCommand extends Service {
   constructor() {
@@ -34,9 +34,8 @@ class CaracolaCommand extends Service {
   async execute({ context, client }) {
     const { from, id } = context;
 
-    const message = this.answers[
-      Math.floor(Math.random() * this.answers.length)
-    ];
+    const message =
+      this.answers[Math.floor(Math.random() * this.answers.length)];
 
     await client.reply(from, message, id);
   }

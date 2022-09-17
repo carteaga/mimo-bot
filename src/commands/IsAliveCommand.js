@@ -1,5 +1,5 @@
 const moment = require('moment');
-const Service = require('../Service');
+const Service = require('../core/Service');
 
 moment.locale('es');
 

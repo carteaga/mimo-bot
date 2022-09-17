@@ -1,4 +1,4 @@
-const Service = require('../Service');
+const Service = require('../core/Service');
 const { happyThursday } = require('../config');
 const { gif } = happyThursday;
 class HappyThursday extends Service {

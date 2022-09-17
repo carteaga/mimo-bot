@@ -2,7 +2,7 @@ const sulla = require('@open-wa/wa-automate');
 const debug = require('debug')('app:server');
 const express = require('express');
 const { configBot, config } = require('./src/config/index');
-const startBot = require('./src/startBot');
+const startBot = require('./src/core/startBot');
 
 const app = express();
 

@@ -1,5 +1,5 @@
 const { getUrl } = require('../utils/getUrl');
-const Service = require('../Service');
+const Service = require('../core/Service');
 const { isNumber } = require('../utils/validations');
 
 const MAX_FACTS = 3;

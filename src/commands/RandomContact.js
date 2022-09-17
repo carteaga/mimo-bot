@@ -1,4 +1,4 @@
-const Service = require('../Service');
+const Service = require('../core/Service');
 
 const MESSAGE_TWO_CONTACT = 'pssss ya sabes quién será el elegido';
 

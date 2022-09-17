@@ -1,4 +1,4 @@
-const Service = require('../Service');
+const Service = require('../core/Service');
 const formatNumber = require('../utils/formatNumber');
 const evaluateMathExpression = require('../utils/evaluateMathExpression');
 

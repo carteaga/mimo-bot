@@ -1,4 +1,4 @@
-const Service = require('../Service');
+const Service = require('../core/Service');
 
 class FlipCoin extends Service {
   constructor() {

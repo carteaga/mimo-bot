@@ -1,5 +1,5 @@
 const { decryptMedia } = require('@open-wa/wa-automate');
-const Service = require('../Service');
+const Service = require('../core/Service');
 const { getUrl } = require('../utils/getUrl');
 
 const uaOverride =
@@ -9,7 +9,8 @@ class ImageToSticker extends Service {
   constructor() {
     super();
     this.command = '!sticker';
-    this.help = 'Pasa una imagen a un sticker. envía una imagen con el texto !sticker. También funciona url !sticker [url]';
+    this.help =
+      'Pasa una imagen a un sticker. envía una imagen con el texto !sticker. También funciona url !sticker [url]';
     this.types = ['image', 'chat'];
   }
 
@@ -59,7 +60,8 @@ class ImageToSticker extends Service {
   }
 
   getExtensionImageToUrl(url) {
-    const validateImageUrl = /https?:[/|.|\w|\s|-]*\.((?:jpg|gif|png|jpge|webp))/;
+    const validateImageUrl =
+      /https?:[/|.|\w|\s|-]*\.((?:jpg|gif|png|jpge|webp))/;
     const match = url.match(validateImageUrl);
     if (match && match.length === 2) {
       return match[1];
@@ -76,10 +78,13 @@ class ImageToSticker extends Service {
         break;
       case 'chat':
         if (quotedMsg && quotedMsg.type === 'image') {
-          await this.imageToSticker({
-            ...quotedMsg,
-            from
-          }, client);
+          await this.imageToSticker(
+            {
+              ...quotedMsg,
+              from,
+            },
+            client
+          );
         } else {
           await this.imageToUrl(context, client, params);
         }

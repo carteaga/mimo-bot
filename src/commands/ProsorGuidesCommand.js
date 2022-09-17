@@ -3,7 +3,7 @@ const moment = require('moment');
 const { getUrl } = require('../utils/getUrl');
 const spoilerMessages = require('../utils/spoilerMessage');
 
-const Service = require('../Service');
+const Service = require('../core/Service');
 
 moment.locale('es');
 

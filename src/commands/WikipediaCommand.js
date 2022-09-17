@@ -1,4 +1,4 @@
-const Service = require('../Service');
+const Service = require('../core/Service');
 const { getUrl } = require('../utils/getUrl');
 
 const MESSAGE_NOT_FOUND = '🤷‍♂️ Wiki no conoce lo que buscas';

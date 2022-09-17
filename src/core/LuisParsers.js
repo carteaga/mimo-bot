@@ -1,7 +1,7 @@
 const debug = require('debug')('app:luis');
 const { escape } = require('querystring');
-const { getUrl } = require('./utils/getUrl');
-const { config } = require('./config/index');
+const { getUrl } = require('../utils/getUrl');
+const { config } = require('../config/index');
 
 class LuisParser {
   async parser(message) {

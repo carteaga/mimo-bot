@@ -1,4 +1,4 @@
-const Service = require('../Service');
+const Service = require('../core/Service');
 
 class BeerCommand extends Service {
   constructor() {
@@ -56,9 +56,8 @@ class BeerCommand extends Service {
       from,
     } = context;
     const max = 5;
-    const beerType = this.beerTypes[
-      Math.floor(Math.random() * this.beerTypes.length)
-    ];
+    const beerType =
+      this.beerTypes[Math.floor(Math.random() * this.beerTypes.length)];
     let repeat = Number.parseInt(params[0], 10) || 1;
     repeat = repeat > max ? max : repeat;
     await client.sendText(

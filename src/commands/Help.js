@@ -1,4 +1,4 @@
-const Service = require('../Service');
+const Service = require('../core/Service');
 const spoilerMessages = require('../utils/spoilerMessage');
 
 class Help extends Service {
