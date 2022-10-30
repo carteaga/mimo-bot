@@ -15,7 +15,9 @@ const config = {
 
 const configBot = {
   sessionId: 'session',
-  qrTimeout: 0,
+  multiDevice: true,
+  headless: true,
+  qrTimeout: 3600,
 };
 
 const happyThursday = {
